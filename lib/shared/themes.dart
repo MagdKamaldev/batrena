@@ -2,7 +2,7 @@ import 'package:batrena/shared/colors.dart';
 import 'package:flutter/material.dart';
 
 ThemeData lightTheme = ThemeData(
-  scaffoldBackgroundColor: celeste,
+  scaffoldBackgroundColor: lavendarBlush,
   appBarTheme: AppBarTheme(
       backgroundColor: carrebianCurrent, toolbarHeight: 80, centerTitle: true),
   colorScheme: ColorScheme.fromSeed(seedColor: carrebianCurrent),

@@ -1,4 +1,5 @@
 import 'package:batrena/shared/colors.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 Widget defaultFormField({
@@ -31,11 +32,14 @@ Widget defaultFormField({
         style: const TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.normal,
+          color: Colors.black, // Set the text color here
         ),
         decoration: InputDecoration(
           labelText: label,
-          labelStyle:
-              Theme.of(context).textTheme.titleMedium!.copyWith(fontSize: 16),
+          labelStyle: Theme.of(context)
+              .textTheme
+              .titleMedium!
+              .copyWith(fontSize: 16, color: raisinBlack),
           prefixIcon: Icon(
             prefix,
             color: carrebianCurrent,
@@ -44,6 +48,7 @@ Widget defaultFormField({
               ? IconButton(
                   icon: Icon(
                     suffix,
+                    color: carrebianCurrent,
                   ),
                   onPressed: () {
                     suffixPressed!();
@@ -51,8 +56,7 @@ Widget defaultFormField({
                 )
               : null,
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(
-                10.0), // Set the desired border radius value
+            borderRadius: BorderRadius.circular(10.0),
           ),
         ),
       ),
@@ -60,3 +64,14 @@ Widget defaultFormField({
     ],
   );
 }
+
+void navigateTo(context, widget) => Navigator.push(
+    context,
+    CupertinoPageRoute(
+      builder: (context) => widget,
+    ));
+
+void navigateAndFinish(context, widget) => Navigator.pushAndRemoveUntil(
+        context, CupertinoPageRoute(builder: (context) => widget), (route) {
+      return false;
+    });
