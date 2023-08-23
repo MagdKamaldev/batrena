@@ -1,8 +1,13 @@
 import 'package:batrena/modules/login/login_screen.dart';
+import 'package:batrena/shared/networks/local/cache_helper.dart';
+import 'package:batrena/shared/networks/remote/dio_helper.dart';
 import 'package:batrena/shared/themes.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  DioHelper.init();
+  await CacheHelper.init();
   runApp(const MyApp());
 }
 

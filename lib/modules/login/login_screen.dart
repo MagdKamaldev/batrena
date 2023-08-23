@@ -33,11 +33,11 @@ class LoginScreen extends StatelessWidget {
             height: MediaQuery.of(context).size.height * 0.04,
           ),
           Text(
-            "A smart way for inventory management",
+            "Welcome Back !",
             style: Theme.of(context)
                 .textTheme
                 .bodyLarge!
-                .copyWith(color: raisinBlack, fontSize: 16),
+                .copyWith(color: raisinBlack, fontSize: 20),
           ),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.07,
