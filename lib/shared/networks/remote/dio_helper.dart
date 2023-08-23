@@ -6,7 +6,7 @@ class DioHelper {
   static init() {
     dio = Dio(
       BaseOptions(
-          baseUrl: "https://student.valuxapps.com/api/",
+          baseUrl: "http://165.22.31.49:3006/api/",
           receiveDataWhenStatusError: true,
           headers: {
             "Content-Type":"application/json",
@@ -18,13 +18,11 @@ class DioHelper {
     required String url,
     Map<String, dynamic>? query,
     String lang = "en",
-    String? token,
-    String? authorization,
+    String? jwt,
   }) async {
     dio!.options.headers = {
-      "lang": lang,
-      "token": token,
-      "Authorization": authorization,
+      
+      "Authorization": "Bearer $jwt",
       "Content-Type": "application/json",
     };
     return await dio!.get(
@@ -37,15 +35,12 @@ class DioHelper {
     required String url,
     Map<String, dynamic>? query,
     required Map<String, dynamic> data,
-    String lang = "en",
-    String? token,
-    String? authorization,
+      String? jwt,
   }) async {
     dio!.options.headers = {
+      
+      "Authorization": "Bearer $jwt",
       "Content-Type": "application/json",
-      "lang": lang,
-      "Authorization": authorization,
-      "token": token,
     };
 
     return dio!.post(
@@ -59,15 +54,11 @@ class DioHelper {
     required String url,
     Map<String, dynamic>? query,
     required Map<String, dynamic> data,
-    String lang = "en",
-    String? token,
-    String? authorization,
+    String? jwt,
   }) async {
-    dio!.options.headers = {
+    dio!.options.headers = {      
+      "Authorization": "Bearer $jwt",
       "Content-Type": "application/json",
-      "lang": lang,
-      "Authorization": authorization,
-      "token": token,
     };
 
     return dio!.put(
@@ -81,15 +72,12 @@ class DioHelper {
     required String url,
     Map<String, dynamic>? query,
     required Map<String, dynamic> data,
-    String lang = "en",
-    String? token,
-    String? authorization,
+    String? jwt,
   }) async {
-    dio!.options.headers = {
+    dio!.options.headers ={
+      
+      "Authorization": "Bearer $jwt",
       "Content-Type": "application/json",
-      "lang": lang,
-      "Authorization": authorization,
-      "token": token,
     };
 
     return dio!.delete(
