@@ -11,4 +11,10 @@ class LoginSuccessState extends LoginStates{}
 
 class LoginErrorState extends LoginStates{}
 
+class GetUserInfoLoadingState extends LoginStates{} 
+
+class GetUserInfoSuccessState extends LoginStates{}
+
+class GetUserInfoErrorState extends LoginStates{}
+
 

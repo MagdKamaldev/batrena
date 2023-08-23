@@ -17,12 +17,20 @@ class LoginCubit extends Cubit<LoginStates> {
       "username": username,
       "password": password,
     }).then((value) {
-      jwt = value.data["jwt"];
-      print(jwt);
+      jwt = value.data["jwt"]; 
       emit(LoginSuccessState());
     }).catchError((error) {
       print(error.toString());
       emit(LoginErrorState());
+    });
+  }
+
+  void getUserInfo() {
+    emit(GetUserInfoLoadingState());
+    DioHelper.getData(url: EndPoints.getUserInfo, jwt: jwt).then((value) {
+      print(value.data["data"]["username"]);
+      print(value.data["data"]["permission"]);
+      emit(GetUserInfoSuccessState());
     });
   }
 }
