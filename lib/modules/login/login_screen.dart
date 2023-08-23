@@ -10,7 +10,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: celeste,
+      backgroundColor: lavendarBlush,
       appBar: AppBar(
           backgroundColor: carrebianCurrent,
           centerTitle: true,
@@ -94,27 +94,27 @@ class LoginScreen extends StatelessWidget {
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.04,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "New User ?",
-                style: Theme.of(context)
-                    .textTheme
-                    .titleMedium!
-                    .copyWith(color: carrebianCurrent, fontSize: 20),
-              ),
-              TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    "SignUp",
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleMedium!
-                        .copyWith(color: raisinBlack, fontSize: 20),
-                  )),
-            ],
-          )
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   children: [
+          //     Text(
+          //       "New User ?",
+          //       style: Theme.of(context)
+          //           .textTheme
+          //           .titleMedium!
+          //           .copyWith(color: carrebianCurrent, fontSize: 20),
+          //     ),
+          //     TextButton(
+          //         onPressed: () {},
+          //         child: Text(
+          //           "SignUp",
+          //           style: Theme.of(context)
+          //               .textTheme
+          //               .titleMedium!
+          //               .copyWith(color: raisinBlack, fontSize: 20),
+          //         )),
+          //   ],
+          // )
         ]),
       ),
     );
