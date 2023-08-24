@@ -3,7 +3,6 @@ import '../../main.dart';
 import '../../models/branch_model.dart';
 import '../../shared/networks/remote/dio_helper.dart';
 import '../../shared/networks/remote/end_points.dart';
-
 part 'app_state.dart';
 
 class AppCubit extends Cubit<AppStates> {

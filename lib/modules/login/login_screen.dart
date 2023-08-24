@@ -37,111 +37,113 @@ class LoginScreen extends StatelessWidget {
             padding: const EdgeInsets.all(20.0),
             child: Form(
               key: formKey,
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      width: size.width * 0.6,
-                      height: size.height * 0.15,
-                      child: Image.asset("assets/images/login_icon.png"),
-                    ),
-                    SizedBox(
-                      height: size.height * 0.04,
-                    ),
-                    Text(
-                      "Welcome Back !",
-                      style: textTheme.bodyLarge!
-                          .copyWith(color: raisinBlack, fontSize: 20),
-                    ),
-                    SizedBox(
-                      height: size.height * 0.07,
-                    ),
-                    defaultFormField(
-                        controller: nameController,
-                        type: TextInputType.emailAddress,
-                        onSubmit: () {},
-                        validate: (String value) {
-                          if (value.isEmpty) {
-                            return "Name must not be empty";
-                          }
-                        },
-                        label: "Name",
-                        prefix: Icons.person,
-                        context: context),
-                    SizedBox(
-                      height: size.height * 0.04,
-                    ),
-                    defaultFormField(
-                        controller: passwordController,
-                        type: TextInputType.visiblePassword,
-                        onSubmit: () {},
-                        validate: (String value) {
-                          if (value.isEmpty) {
-                            return "Password must not be empty";
-                          }
-                        },
-                        label: "Password",
-                        prefix: Icons.lock,
-                        suffix: Icons.remove_red_eye,
-                        context: context),
-                    SizedBox(
-                      height: size.height * 0.06,
-                    ),
-                    ConditionalBuilder(
-                      condition: state is! LoginLoadingState,
-                      fallback: (context) => const Center(
-                        child: CircularProgressIndicator(),
+              child: SingleChildScrollView(
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: size.width * 0.6,
+                        height: size.height * 0.15,
+                        child: Image.asset("assets/images/login_icon.png"),
                       ),
-                      builder: (context) => ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Container(
-                          width: double.infinity,
-                          height: size.height * 0.07,
-                          decoration: BoxDecoration(
-                            color: carrebianCurrent,
-                          ),
-                          child: MaterialButton(
-                            onPressed: () {
-                              if (formKey.currentState!.validate()) {
-                                cubit.login(
-                                    username: nameController.text,
-                                    password: passwordController.text);
-                              }
-                            },
-                            color: carrebianCurrent,
-                            child: Text(
-                              "Login",
-                              style: textTheme.bodyLarge,
+                      SizedBox(
+                        height: size.height * 0.04,
+                      ),
+                      Text(
+                        "Welcome Back !",
+                        style: textTheme.bodyLarge!
+                            .copyWith(color: raisinBlack, fontSize: 20),
+                      ),
+                      SizedBox(
+                        height: size.height * 0.07,
+                      ),
+                      defaultFormField(
+                          controller: nameController,
+                          type: TextInputType.emailAddress,
+                          onSubmit: () {},
+                          validate: (String value) {
+                            if (value.isEmpty) {
+                              return "Name must not be empty";
+                            }
+                          },
+                          label: "Name",
+                          prefix: Icons.person,
+                          context: context),
+                      SizedBox(
+                        height: size.height * 0.04,
+                      ),
+                      defaultFormField(
+                          controller: passwordController,
+                          type: TextInputType.visiblePassword,
+                          onSubmit: () {},
+                          validate: (String value) {
+                            if (value.isEmpty) {
+                              return "Password must not be empty";
+                            }
+                          },
+                          label: "Password",
+                          prefix: Icons.lock,
+                          suffix: Icons.remove_red_eye,
+                          context: context),
+                      SizedBox(
+                        height: size.height * 0.06,
+                      ),
+                      ConditionalBuilder(
+                        condition: state is! LoginLoadingState,
+                        fallback: (context) => const Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                        builder: (context) => ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Container(
+                            width: double.infinity,
+                            height: size.height * 0.07,
+                            decoration: BoxDecoration(
+                              color: carrebianCurrent,
+                            ),
+                            child: MaterialButton(
+                              onPressed: () {
+                                if (formKey.currentState!.validate()) {
+                                  cubit.login(
+                                      username: nameController.text,
+                                      password: passwordController.text);
+                                }
+                              },
+                              color: carrebianCurrent,
+                              child: Text(
+                                "Login",
+                                style: textTheme.bodyLarge,
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: size.height * 0.04,
-                    ),
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.center,
-                    //   children: [
-                    //     Text(
-                    //       "New User ?",
-                    //       style: Theme.of(context)
-                    //           .textTheme
-                    //           .titleMedium!
-                    //           .copyWith(color: carrebianCurrent, fontSize: 20),
-                    //     ),
-                    //     TextButton(
-                    //         onPressed: () {},
-                    //         child: Text(
-                    //           "SignUp",
-                    //           style: Theme.of(context)
-                    //               .textTheme
-                    //               .titleMedium!
-                    //               .copyWith(color: raisinBlack, fontSize: 20),
-                    //         )),
-                    //   ],
-                    // )
-                  ]),
+                      SizedBox(
+                        height: size.height * 0.04,
+                      ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.center,
+                      //   children: [
+                      //     Text(
+                      //       "New User ?",
+                      //       style: Theme.of(context)
+                      //           .textTheme
+                      //           .titleMedium!
+                      //           .copyWith(color: carrebianCurrent, fontSize: 20),
+                      //     ),
+                      //     TextButton(
+                      //         onPressed: () {},
+                      //         child: Text(
+                      //           "SignUp",
+                      //           style: Theme.of(context)
+                      //               .textTheme
+                      //               .titleMedium!
+                      //               .copyWith(color: raisinBlack, fontSize: 20),
+                      //         )),
+                      //   ],
+                      // )
+                    ]),
+              ),
             ),
           ),
         );

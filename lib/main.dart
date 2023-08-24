@@ -4,7 +4,7 @@ import 'package:batrena/shared/networks/remote/dio_helper.dart';
 import 'package:batrena/shared/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'cubit/home_cubit.dart/app_cubit.dart';
+import 'cubit/home_cubit/app_cubit.dart';
 import 'cubit/login_cubit/login_cubit.dart';
 
 String? jwt = "";

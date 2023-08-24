@@ -1,8 +1,10 @@
+import 'package:batrena/modules/add_branch/add_branch_screen.dart';
 import 'package:batrena/modules/home/drawer.dart';
 import 'package:batrena/shared/colors.dart';
+import 'package:batrena/shared/components/components.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../cubit/home_cubit.dart/app_cubit.dart';
+import '../../cubit/home_cubit/app_cubit.dart';
 import '../../models/branch_model.dart';
 
 class HomeLayout extends StatelessWidget {
@@ -76,7 +78,9 @@ class HomeLayout extends StatelessWidget {
           ),
           floatingActionButton: FloatingActionButton(
             backgroundColor: carrebianCurrent,
-            onPressed: () {},
+            onPressed: () {
+              navigateTo(context, AddBranch());
+            },
             child: Icon(
               Icons.add,
               color: lavendarBlush,
