@@ -43,6 +43,8 @@ dependencies:
   conditional_builder_null_safety: ^0.0.6
   google_maps_flutter: ^2.4.0
   lottie: ^2.6.0
+  geolocator: ^10.0.0
+  geocoding: ^2.1.0
  
 
 dev_dependencies:

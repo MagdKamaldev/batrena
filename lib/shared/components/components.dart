@@ -65,6 +65,23 @@ Widget defaultFormField({
   );
 }
 
+void showCustomSnackBar(
+    BuildContext context, String message, Color backgroundColor) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Center(
+        child: Text(
+          message,
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
+      ),
+      backgroundColor: backgroundColor,
+      duration: const Duration(seconds: 2),
+    ),
+  );
+}
+
+
 void navigateTo(context, widget) => Navigator.push(
     context,
     CupertinoPageRoute(

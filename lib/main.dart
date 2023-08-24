@@ -1,3 +1,5 @@
+import 'package:batrena/cubit/add_branch/add_branch_cubit.dart';
+import 'package:batrena/modules/home/home_layout.dart';
 import 'package:batrena/modules/login/login_screen.dart';
 import 'package:batrena/shared/networks/local/cache_helper.dart';
 import 'package:batrena/shared/networks/remote/dio_helper.dart';
@@ -28,12 +30,20 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) {
           return AppCubit();
         }),
+        BlocProvider(create: (context) {
+          return AddBranchCubit();
+        }),
       ],
-      child: MaterialApp(
-        title: 'Flutter Demo',
-        debugShowCheckedModeBanner: false,
-        theme: lightTheme,
-        home: LoginScreen(),
+      child: BlocConsumer<AppCubit, AppStates>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          return MaterialApp(
+            title: 'Flutter Demo',
+            debugShowCheckedModeBanner: false,
+            theme: lightTheme,
+            home: LoginScreen(),
+          );
+        },
       ),
     );
   }
