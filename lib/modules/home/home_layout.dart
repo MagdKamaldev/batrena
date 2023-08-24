@@ -2,13 +2,25 @@ import 'package:batrena/modules/add_branch/add_branch_screen.dart';
 import 'package:batrena/modules/home/drawer.dart';
 import 'package:batrena/shared/colors.dart';
 import 'package:batrena/shared/components/components.dart';
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../cubit/home_cubit/app_cubit.dart';
 import '../../models/branch_model.dart';
 
-class HomeLayout extends StatelessWidget {
+class HomeLayout extends StatefulWidget {
   const HomeLayout({super.key});
+
+  @override
+  State<HomeLayout> createState() => _HomeLayoutState();
+}
+
+class _HomeLayoutState extends State<HomeLayout> {
+  @override
+  void initState() {
+    AppCubit.get(context).fetchBranches();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,17 +68,23 @@ class HomeLayout extends StatelessWidget {
                   SizedBox(
                     height: size.height * 0.03,
                   ),
-                  GridView.count(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 20,
-                    crossAxisSpacing: 20,
-                    childAspectRatio: 1 / 1.3,
-                    children: List.generate(
-                      cubit.branches.length,
-                      (index) => buildBranchItem(
-                          context: context, branch: cubit.branches[index]),
+                  ConditionalBuilder(
+                    condition: state is FetchBranchesSuccessState,
+                    fallback: (context) => const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                    builder: (context) => GridView.count(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 20,
+                      crossAxisSpacing: 20,
+                      childAspectRatio: 1 / 1.3,
+                      children: List.generate(
+                        cubit.branches.length,
+                        (index) => buildBranchItem(
+                            context: context, branch: cubit.branches[index]),
+                      ),
                     ),
                   ),
                   const SizedBox(

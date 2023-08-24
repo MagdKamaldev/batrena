@@ -9,6 +9,7 @@ class AppCubit extends Cubit<AppStates> {
   AppCubit() : super(AppInitial()) {
     fetchBranches();
   }
+
   static AppCubit get(context) => BlocProvider.of(context);
 
   void getUserInfo() {
@@ -23,11 +24,12 @@ class AppCubit extends Cubit<AppStates> {
   void fetchBranches() {
     emit(FetchBranchesLoadingState());
     DioHelper.getData(url: EndPoints.fetchBranches, jwt: jwt).then((value) {
-      branches = List<Branch>.from(
-          value.data.map((branchJson) => Branch.fromJson(branchJson)));
-
-      emit(FetchBranchesSuccessState(branches));
+      branches =
+          List<Branch>.from(value.data.map((json) => Branch.fromJson(json)));
+     
+      emit(FetchBranchesSuccessState());
     }).catchError((error) {
+    
       emit(FetchBranchesErrorState());
     });
   }

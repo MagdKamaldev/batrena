@@ -1,4 +1,5 @@
 import 'package:batrena/cubit/add_branch/add_branch_cubit.dart';
+import 'package:batrena/modules/add_branch/map_screen.dart';
 import 'package:batrena/shared/components/components.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
@@ -74,54 +75,66 @@ class AddBranch extends StatelessWidget {
                 "Location",
                 style: textTheme.bodyLarge!.copyWith(color: raisinBlack),
               ),
-              Container(
-                decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(15)),
-                width: size.width * 0.9,
-                height: size.height * 0.25,
-                child: Stack(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(16),
-                      child: ConditionalBuilder(
-                        condition: state is GetLatLongSuccessState,
-                        builder: (context) => GoogleMap(
-                          mapType: MapType.normal,
-                          zoomControlsEnabled: false,
-                          zoomGesturesEnabled: true,
-                          initialCameraPosition: CameraPosition(
-                              zoom: 15.5,
-                              target: LatLng(cubit.currentLatLong!.latitude,
-                                  cubit.currentLatLong!.longitude)),
-                          onMapCreated: (GoogleMapController controller) {},
-                          markers: const {},
-                        ),
-                        fallback: (context) => const Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16),
-                            color: palePurple.withOpacity(0.8)),
-                        width: double.infinity,
-                        padding: const EdgeInsets.all(16),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text('Choose Another Location',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleSmall!
-                                    .copyWith(fontSize: 15)),
-                          ],
+              GestureDetector(
+                onTap: () {
+                  navigateTo(context, MapScreen());
+                },
+                child: Container(
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(15)),
+                  width: size.width * 0.9,
+                  height: size.height * 0.25,
+                  child: Stack(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(16),
+                        child: ConditionalBuilder(
+                          condition: state is SetMarkerSuccessState ||
+                              state is GetLatLongSuccessState ||
+                              state is ResquestPermissionSuccessState,
+                          builder: (context) => GoogleMap(
+                            mapType: MapType.normal,
+                            zoomControlsEnabled: false,
+                            zoomGesturesEnabled: false,
+                            tiltGesturesEnabled: false,
+                            scrollGesturesEnabled: false,
+                            rotateGesturesEnabled: false,
+                            initialCameraPosition: CameraPosition(
+                                zoom: 15.5,
+                                target: LatLng(cubit.currentLatLong!.latitude,
+                                    cubit.currentLatLong!.longitude)),
+                            onMapCreated: (GoogleMapController controller) {
+                              cubit.setUserMarkerCustomImage(context);
+                            },
+                            markers: cubit.myMarkers,
+                          ),
+                          fallback: (context) => const Center(
+                            child: CircularProgressIndicator(),
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16),
+                              color: palePurple.withOpacity(0.8)),
+                          width: double.infinity,
+                          padding: const EdgeInsets.all(16),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text('Choose Another Location',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleSmall!
+                                      .copyWith(fontSize: 15)),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ]),

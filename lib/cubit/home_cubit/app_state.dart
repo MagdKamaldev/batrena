@@ -13,9 +13,7 @@ class GetUserInfoErrorState extends AppStates {}
 class FetchBranchesLoadingState extends AppStates {}
 
 class FetchBranchesSuccessState extends AppStates {
-  final List<Branch> branch;
-
-  FetchBranchesSuccessState(this.branch);
+ 
 }
 
 class FetchBranchesErrorState extends AppStates {}

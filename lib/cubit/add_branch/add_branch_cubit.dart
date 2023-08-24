@@ -72,7 +72,7 @@ class AddBranchCubit extends Cubit<AddBranchState> {
 
   Set<Marker> myMarkers = {};
 
-  void setMarkerCustomImage(context) async {
+  void setUserMarkerCustomImage(context) async {
     emit(SetMarkerLoadingState());
     myMarkers.clear();
     myMarkers.add(Marker(
@@ -84,7 +84,25 @@ class AddBranchCubit extends Cubit<AddBranchState> {
       onDragEnd: (LatLng t) {},
       icon: await BitmapDescriptor.fromAssetImage(
         ImageConfiguration.empty,
-        "assets/images/marker.png",
+        "assets/images/user_location.png",
+      ),
+    ));
+    emit(SetMarkerSuccessState());
+  }
+
+  void setBranchMarkerCustomImage(context) async {
+    emit(SetMarkerLoadingState());
+    myMarkers.clear();
+    myMarkers.add(Marker(
+      onTap: () =>
+          showCustomSnackBar(context, "Long press to move", lavendarBlush),
+      markerId: const MarkerId('userLocationMarker'),
+      position: LatLng(currentLatLong!.latitude, currentLatLong!.longitude),
+      draggable: true,
+      onDragEnd: (LatLng t) {},
+      icon: await BitmapDescriptor.fromAssetImage(
+        ImageConfiguration.empty,
+        "assets/images/branch_location.png",
       ),
     ));
     emit(SetMarkerSuccessState());
