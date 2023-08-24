@@ -1,11 +1,11 @@
 // ignore_for_file: must_be_immutable
-import 'package:batrena/cubit/cubit/login_cubit.dart';
 import 'package:batrena/modules/home/home_layout.dart';
 import 'package:batrena/shared/colors.dart';
 import 'package:batrena/shared/components/components.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../cubit/login_cubit/login_cubit.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
@@ -21,12 +21,11 @@ class LoginScreen extends StatelessWidget {
     return BlocConsumer<LoginCubit, LoginStates>(
       listener: (context, state) {
         if (state is LoginSuccessState) {
-          navigateTo(context, const HomeLayout());
+          navigateAndFinish(context, HomeLayout());
         }
       },
       builder: (context, state) {
         return Scaffold(
-         
           appBar: AppBar(
               backgroundColor: carrebianCurrent,
               centerTitle: true,
