@@ -5,6 +5,7 @@ import 'package:batrena/shared/components/components.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 import '../../cubit/login_cubit/login_cubit.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -44,7 +45,8 @@ class LoginScreen extends StatelessWidget {
                       SizedBox(
                         width: size.width * 0.6,
                         height: size.height * 0.15,
-                        child: Image.asset("assets/images/login_icon.png"),
+                        child: Lottie.asset(
+                            "assets/animations/animation_llo54g9c.json"),
                       ),
                       SizedBox(
                         height: size.height * 0.04,
