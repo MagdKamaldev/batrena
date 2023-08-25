@@ -36,9 +36,9 @@ class BranchDetails extends StatelessWidget {
           ),
           body: Form(
             key: formKey,
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
+            child: Padding(
+              padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
+              child: SingleChildScrollView(
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -49,7 +49,7 @@ class BranchDetails extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () {
-                          navigateTo(context, MapScreen());
+                          navigateTo(context, const MapScreen());
                         },
                         child: Container(
                           decoration: BoxDecoration(
