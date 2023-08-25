@@ -8,8 +8,24 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../shared/colors.dart';
 
-class AddBranch extends StatelessWidget {
+class AddBranch extends StatefulWidget {
   const AddBranch({super.key});
+
+  @override
+  State<AddBranch> createState() => _AddBranchState();
+}
+
+class _AddBranchState extends State<AddBranch> {
+  @override
+  void initState() {
+    setState(() {
+      if (AddBranchCubit.get(context).myMarkers.isEmpty) {
+        AddBranchCubit.get(context).setBranchMarkerCustomImage(context);
+      }
+    });
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -89,9 +105,7 @@ class AddBranch extends StatelessWidget {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(16),
                         child: ConditionalBuilder(
-                          condition: state is SetMarkerSuccessState ||
-                              state is GetLatLongSuccessState ||
-                              state is ResquestPermissionSuccessState,
+                          condition: cubit.myMarkers.isNotEmpty,
                           builder: (context) => GoogleMap(
                             mapType: MapType.normal,
                             zoomControlsEnabled: false,
@@ -101,11 +115,10 @@ class AddBranch extends StatelessWidget {
                             rotateGesturesEnabled: false,
                             initialCameraPosition: CameraPosition(
                                 zoom: 15.5,
-                                target: LatLng(cubit.currentLatLong!.latitude,
-                                    cubit.currentLatLong!.longitude)),
-                            onMapCreated: (GoogleMapController controller) {
-                              cubit.setUserMarkerCustomImage(context);
-                            },
+                                target: LatLng(
+                                    cubit.myMarkers.first.position.latitude,
+                                    cubit.myMarkers.first.position.longitude)),
+                            onMapCreated: (GoogleMapController controller) {},
                             markers: cubit.myMarkers,
                           ),
                           fallback: (context) => const Center(

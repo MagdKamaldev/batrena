@@ -1,6 +1,7 @@
 import 'package:batrena/shared/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 Widget defaultFormField({
   required TextEditingController controller,
@@ -81,6 +82,17 @@ void showCustomSnackBar(
   );
 }
 
+void showSetLoactionSuccess(context, height, width) {
+  showDialog(
+    context: context,
+    builder: (context) => Container(
+      color: lavendarBlush,
+      width: 200,
+      height: 200,
+      child: Lottie.asset("assets/animations/location_set.json"),
+    ),
+  );
+}
 
 void navigateTo(context, widget) => Navigator.push(
     context,

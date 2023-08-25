@@ -2,10 +2,8 @@ import 'package:batrena/shared/colors.dart';
 import 'package:batrena/shared/components/components.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-
 part 'add_branch_state.dart';
 
 class AddBranchCubit extends Cubit<AddBranchState> {
@@ -52,43 +50,9 @@ class AddBranchCubit extends Cubit<AddBranchState> {
         zoom: 17.4746);
   }
 
-  List<Placemark> placemarks = [];
-
-  Position? orderLatLong;
-
-  void setBranchLocation(double latitude, double longitude) {
-    orderLatLong = Position(
-        latitude: latitude,
-        longitude: longitude,
-        timestamp: DateTime.now(),
-        accuracy: 10.0,
-        altitude: 0.0,
-        heading: 0.0,
-        speed: 0.0,
-        speedAccuracy: 0.0);
-
-    emit(SetBranchLoactionState());
-  }
-
   Set<Marker> myMarkers = {};
 
-  void setUserMarkerCustomImage(context) async {
-    emit(SetMarkerLoadingState());
-    myMarkers.clear();
-    myMarkers.add(Marker(
-      onTap: () =>
-          showCustomSnackBar(context, "Long press to move", lavendarBlush),
-      markerId: const MarkerId('userLocationMarker'),
-      position: LatLng(currentLatLong!.latitude, currentLatLong!.longitude),
-      draggable: true,
-      onDragEnd: (LatLng t) {},
-      icon: await BitmapDescriptor.fromAssetImage(
-        ImageConfiguration.empty,
-        "assets/images/user_location.png",
-      ),
-    ));
-    emit(SetMarkerSuccessState());
-  }
+  
 
   void setBranchMarkerCustomImage(context) async {
     emit(SetMarkerLoadingState());
@@ -107,4 +71,24 @@ class AddBranchCubit extends Cubit<AddBranchState> {
     ));
     emit(SetMarkerSuccessState());
   }
+
+  Position? branchPosition;
+
+  void setBranchLocation(double latitude, double longitude) {
+    branchPosition = Position(
+        latitude: latitude,
+        longitude: longitude,
+        timestamp: DateTime.now(),
+        accuracy: 10.0,
+        altitude: 0.0,
+        heading: 0.0,
+        speed: 0.0,
+        speedAccuracy: 0.0);
+
+    emit(SetBranchLoactionState());
+  }
+
+  
+
+ 
 }

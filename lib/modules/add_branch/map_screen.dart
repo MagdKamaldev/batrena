@@ -3,10 +3,16 @@ import 'package:batrena/shared/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import '../../shared/components/components.dart';
 
-class MapScreen extends StatelessWidget {
+class MapScreen extends StatefulWidget {
   const MapScreen({super.key});
 
+  @override
+  State<MapScreen> createState() => _MapScreenState();
+}
+
+class _MapScreenState extends State<MapScreen> {
   @override
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
@@ -24,51 +30,51 @@ class MapScreen extends StatelessWidget {
             ),
           ),
           body: GoogleMap(
+            myLocationButtonEnabled: true,
+            myLocationEnabled: true,
             mapType: MapType.normal,
             zoomControlsEnabled: false,
             compassEnabled: false,
             liteModeEnabled: false,
+            onTap: (LatLng latLng) async {
+              AddBranchCubit.get(context).myMarkers.clear();
+              AddBranchCubit.get(context).myMarkers.add(Marker(
+                    onTap: () => showCustomSnackBar(
+                        context, "Long press to move", lavendarBlush),
+                    markerId: const MarkerId('userLocationMarker'),
+                    position: latLng,
+                    draggable: true,
+                    onDragEnd: (LatLng t) {},
+                    icon: await BitmapDescriptor.fromAssetImage(
+                      ImageConfiguration.empty,
+                      "assets/images/branch_location.png",
+                    ),
+                  ));
+              setState(() {});
+            },
             initialCameraPosition: CameraPosition(
                 zoom: 15.5,
-                target: LatLng(cubit.currentLatLong!.latitude,
-                    cubit.currentLatLong!.longitude)),
-            onMapCreated: (GoogleMapController controller) {
-              cubit.setBranchMarkerCustomImage(context);
-            },
+                target: LatLng(cubit.myMarkers.first.position.latitude,
+                    cubit.myMarkers.first.position.longitude)),
+            onMapCreated: (GoogleMapController controller) {},
             markers: cubit.myMarkers,
           ),
-          floatingActionButton: Padding(
-            padding: EdgeInsets.only(
-                left: size.width * 0.1, bottom: size.height * 0.01),
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                width: size.width * 0.4,
-                height: size.height * 0.05,
-                decoration: BoxDecoration(
-                    color: carrebianCurrent,
-                    borderRadius: BorderRadius.circular(10)),
-                child: FloatingActionButton(
-                  elevation: 2,
-                  onPressed: () {},
-                  backgroundColor: carrebianCurrent,
-                  child: Text(
-                    "My Location",
-                    style:
-                        textTheme.titleMedium!.copyWith(color: lavendarBlush),
-                  ),
+          bottomNavigationBar: GestureDetector(
+            onTap: () {
+              cubit.setBranchLocation(cubit.myMarkers.first.position.latitude,
+                  cubit.myMarkers.first.position.longitude);
+
+              showSetLoactionSuccess(context, size.height, size.width);
+            },
+            child: Container(
+              color: carrebianCurrent,
+              width: size.width,
+              height: size.height * 0.08,
+              child: Center(
+                child: Text(
+                  "Confirm Location",
+                  style: textTheme.bodyLarge,
                 ),
-              ),
-            ),
-          ),
-          bottomNavigationBar: Container(
-            color: carrebianCurrent,
-            width: size.width,
-            height: size.height * 0.08,
-            child: Center(
-              child: Text(
-                "Confirm Location",
-                style: textTheme.bodyLarge,
               ),
             ),
           ),
