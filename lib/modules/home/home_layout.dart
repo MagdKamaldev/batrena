@@ -1,4 +1,4 @@
-import 'package:batrena/modules/add_branch/add_branch_screen.dart';
+import 'package:batrena/modules/add_branch/branch_details.dart';
 import 'package:batrena/modules/home/drawer.dart';
 import 'package:batrena/shared/colors.dart';
 import 'package:batrena/shared/components/components.dart';
@@ -97,7 +97,7 @@ class _HomeLayoutState extends State<HomeLayout> {
           floatingActionButton: FloatingActionButton(
             backgroundColor: carrebianCurrent,
             onPressed: () {
-              navigateTo(context, AddBranch());
+              navigateTo(context, BranchDetails());
             },
             child: Icon(
               Icons.add,

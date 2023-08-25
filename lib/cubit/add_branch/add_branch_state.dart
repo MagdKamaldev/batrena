@@ -24,4 +24,12 @@ class SetMarkerLoadingState extends AddBranchState{}
 
 class SetMarkerSuccessState extends AddBranchState{}
 
+class CheckMarkersState extends AddBranchState{}
+
+class AddBranchLoadingState extends AddBranchState{}
+
+class AddBranchSuccessState extends AddBranchState{}
+
+class AddBranchErrorState extends AddBranchState{}
+
 

@@ -82,14 +82,50 @@ void showCustomSnackBar(
   );
 }
 
-void showSetLoactionSuccess(context, height, width) {
+void showSetLoactionSuccess(context, height, width, TextTheme textTheme) {
   showDialog(
     context: context,
-    builder: (context) => Container(
-      color: lavendarBlush,
-      width: 200,
-      height: 200,
-      child: Lottie.asset("assets/animations/location_set.json"),
+    builder: (context) => Align(
+      alignment: Alignment.center,
+      child: Container(
+        width: width * 0.75,
+        height: height * 0.6,
+        decoration: BoxDecoration(
+            color: lavendarBlush, borderRadius: BorderRadius.circular(10)),
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            children: [
+              Lottie.asset("assets/animations/location_set.json"),
+              Text(
+                "Location Set Successfully !",
+                style: textTheme.titleMedium!.copyWith(color: carrebianCurrent),
+              ),
+              SizedBox(
+                height: height * 0.03,
+              ),
+              Container(
+                width: width * 0.3,
+                decoration: BoxDecoration(
+                    color: carrebianCurrent,
+                    borderRadius: BorderRadius.circular(10)),
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                  },
+                  child: Center(
+                    child: Text(
+                      "Back ",
+                      style: textTheme.bodyLarge!,
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
     ),
   );
 }

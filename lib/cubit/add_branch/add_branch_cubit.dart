@@ -1,5 +1,8 @@
+import 'package:batrena/cubit/home_cubit/app_cubit.dart';
 import 'package:batrena/shared/colors.dart';
 import 'package:batrena/shared/components/components.dart';
+import 'package:batrena/shared/networks/remote/dio_helper.dart';
+import 'package:batrena/shared/networks/remote/end_points.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
@@ -52,8 +55,6 @@ class AddBranchCubit extends Cubit<AddBranchState> {
 
   Set<Marker> myMarkers = {};
 
-  
-
   void setBranchMarkerCustomImage(context) async {
     emit(SetMarkerLoadingState());
     myMarkers.clear();
@@ -88,7 +89,24 @@ class AddBranchCubit extends Cubit<AddBranchState> {
     emit(SetBranchLoactionState());
   }
 
-  
-
- 
+  void addBranch({
+    required String name,
+    required String adress,
+    required double lat,
+    required double long,
+    required BuildContext context,
+  }) {
+    emit(AddBranchLoadingState());
+    DioHelper.postData(url: EndPoints.registerBranch, data: {
+      "name": name,
+      "lat_lng": {
+        "lat": lat,
+        "lng": long,
+      },
+      "address": adress,
+    }).then((value) {
+      AppCubit.get(context).fetchBranches();
+      emit(AddBranchSuccessState());
+    });
+  }
 }
