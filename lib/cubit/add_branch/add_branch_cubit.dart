@@ -1,4 +1,5 @@
 import 'package:batrena/cubit/home_cubit/app_cubit.dart';
+import 'package:batrena/main.dart';
 import 'package:batrena/shared/colors.dart';
 import 'package:batrena/shared/components/components.dart';
 import 'package:batrena/shared/networks/remote/dio_helper.dart';
@@ -97,7 +98,7 @@ class AddBranchCubit extends Cubit<AddBranchState> {
     required BuildContext context,
   }) {
     emit(AddBranchLoadingState());
-    DioHelper.postData(url: EndPoints.registerBranch, data: {
+    DioHelper.postData(url: EndPoints.registerBranch, jwt: jwt, data: {
       "name": name,
       "lat_lng": {
         "lat": lat,
@@ -106,7 +107,16 @@ class AddBranchCubit extends Cubit<AddBranchState> {
       "address": adress,
     }).then((value) {
       AppCubit.get(context).fetchBranches();
+      showCustomSnackBar(
+          context,
+          value.data["message"],
+          value.data["message"] == "Branch Registered"
+              ? Colors.green
+              : Colors.red);
       emit(AddBranchSuccessState());
+    
+    }).catchError((error) {
+      print(error.toString());
     });
   }
 }
