@@ -17,13 +17,11 @@ class LoginCubit extends Cubit<LoginStates> {
       "username": username,
       "password": password,
     }).then((value) {
-      jwt = value.data["jwt"]; 
+      jwt = value.data["jwt"];
       emit(LoginSuccessState());
     }).catchError((error) {
       print(error.toString());
       emit(LoginErrorState());
     });
   }
-
- 
 }
