@@ -1,4 +1,5 @@
 import 'package:batrena/modules/add_branch/branch_details.dart';
+import 'package:batrena/modules/branch_details_shown/branch_details_showed.dart';
 import 'package:batrena/modules/home/drawer.dart';
 import 'package:batrena/shared/colors.dart';
 import 'package:batrena/shared/components/components.dart';
@@ -6,6 +7,7 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../cubit/home_cubit/app_cubit.dart';
+import '../../main.dart';
 import '../../models/branch_model.dart';
 
 class HomeLayout extends StatefulWidget {
@@ -28,7 +30,9 @@ class _HomeLayoutState extends State<HomeLayout> {
     var size = MediaQuery.of(context).size;
     var textTheme = Theme.of(context).textTheme;
     return BlocConsumer<AppCubit, AppStates>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        print(jwt);
+      },
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
@@ -115,65 +119,79 @@ class _HomeLayoutState extends State<HomeLayout> {
   }) {
     var size = MediaQuery.of(context).size;
     var textTheme = Theme.of(context).textTheme;
-    return Container(
-      decoration: BoxDecoration(
-        color: carrebianCurrent,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.only(top: 12, left: 15, right: 15),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Text(
-                  branch.name,
-                  style: textTheme.titleMedium!.copyWith(color: lavendarBlush),
-                ),
-                SizedBox(
-                    height: size.height * 0.03,
-                    child: Image.asset("assets/images/branch.png")),
-              ],
-            ),
-            SizedBox(
-              height: size.height * 0.02,
-            ),
-            Container(
-              width: double.infinity,
-              height: 1,
-              color: lavendarBlush,
-            ),
-            SizedBox(
-              height: size.height * 0.02,
-            ),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: SizedBox(
-                height: size.height * 0.1,
-                child: Image.asset(
-                  "assets/images/batrena.jpg",
-                  fit: BoxFit.cover,
+    return GestureDetector(
+      onTap: () {
+        navigateTo(
+            context,
+            BranchDetailsShown(
+              branch: branch,
+            ));
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          color: carrebianCurrent,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.only(top: 12, left: 15, right: 15),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text(
+                    branch.name,
+                    style:
+                        textTheme.titleMedium!.copyWith(color: lavendarBlush),
+                  ),
+                  SizedBox(
+                      height: size.height * 0.03,
+                      child: Image.asset("assets/images/branch.png")),
+                ],
+              ),
+              SizedBox(
+                height: size.height * 0.02,
+              ),
+              Container(
+                width: double.infinity,
+                height: 1,
+                color: lavendarBlush,
+              ),
+              SizedBox(
+                height: size.height * 0.02,
+              ),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: SizedBox(
+                  height: size.height * 0.1,
+                  child: Hero(
+                    tag: "branch ${branch.id}",
+                    child: Image.asset(
+                      "assets/images/batrena.jpg",
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
               ),
-            ),
-            const Spacer(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Text(
-                  "Details",
-                  style: textTheme.titleMedium!.copyWith(color: lavendarBlush),
-                ),
-                Icon(
-                  Icons.navigate_next,
-                  color: lavendarBlush,
-                ),
-              ],
-            ),
-            const Spacer(),
-          ],
+              const Spacer(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text(
+                    "Details",
+                    style:
+                        textTheme.titleMedium!.copyWith(color: lavendarBlush),
+                  ),
+                  Icon(
+                    Icons.navigate_next,
+                    color: lavendarBlush,
+                  ),
+                ],
+              ),
+              const Spacer(),
+            ],
+          ),
         ),
       ),
     );

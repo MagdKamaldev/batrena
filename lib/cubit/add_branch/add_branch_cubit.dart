@@ -101,20 +101,21 @@ class AddBranchCubit extends Cubit<AddBranchState> {
     DioHelper.postData(url: EndPoints.registerBranch, jwt: jwt, data: {
       "name": name,
       "lat_lng": {
-        "lat": lat,
-        "lng": long,
+        "lat": lat.toString(),
+        "lng": long.toString(),
       },
       "address": adress,
     }).then((value) {
       AppCubit.get(context).fetchBranches();
+      print(jwt);
       showCustomSnackBar(
-          context,
-          value.data["message"],
-          value.data["message"] == "Branch Registered"
-              ? Colors.green
-              : Colors.red);
+        context,
+        value.data["message"],
+        value.data["message"] == "Branch Registered"
+            ? Colors.green
+            : Colors.red,
+      );
       emit(AddBranchSuccessState());
-    
     }).catchError((error) {
       print(error.toString());
     });
