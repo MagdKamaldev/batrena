@@ -84,9 +84,7 @@ class BranchDetailsShown extends StatelessWidget {
                 height: 1,
                 color: carrebianCurrent,
               ),
-              SizedBox(
-                height: size.height * 0.04,
-              ),
+              const Spacer(),
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: Container(
@@ -98,7 +96,11 @@ class BranchDetailsShown extends StatelessWidget {
                   child: MaterialButton(
                     color: carrebianCurrent,
                     onPressed: () {
-                      navigateTo(context, BranchInventory(branch: branch,));
+                      navigateTo(
+                          context,
+                          BranchInventory(
+                            branch: branch,
+                          ));
                     },
                     child: Row(
                       children: [
@@ -119,9 +121,7 @@ class BranchDetailsShown extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
-                height: size.height * 0.04,
-              ),
+              const Spacer(),
             ],
           ),
         );
