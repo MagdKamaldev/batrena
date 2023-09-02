@@ -26,10 +26,10 @@ class AppCubit extends Cubit<AppStates> {
     DioHelper.getData(url: EndPoints.fetchBranches, jwt: jwt).then((value) {
       branches =
           List<Branch>.from(value.data.map((json) => Branch.fromJson(json)));
-     
+
       emit(FetchBranchesSuccessState());
     }).catchError((error) {
-    
+      print(error.toString());
       emit(FetchBranchesErrorState());
     });
   }

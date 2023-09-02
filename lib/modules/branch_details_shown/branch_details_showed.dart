@@ -12,7 +12,6 @@ class BranchDetailsShown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var cubit = BranchDetailsCubit.get(context);
     var size = MediaQuery.of(context).size;
     var textTheme = Theme.of(context).textTheme;
     return BlocConsumer<BranchDetailsCubit, BranchDetailsState>(
