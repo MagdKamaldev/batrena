@@ -109,7 +109,7 @@ class BranchDetailsShown extends StatelessWidget {
                               .copyWith(color: lavendarBlush),
                         ),
                         SizedBox(
-                          width: size.width * 0.04,
+                          width: size.width * 0.02,
                         ),
                         Icon(
                           Icons.arrow_forward_ios,
