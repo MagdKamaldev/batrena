@@ -1,6 +1,9 @@
 import 'package:batrena/models/branch_model.dart';
+import 'package:batrena/modules/branch_details_shown/add_item.dart';
 import 'package:batrena/shared/colors.dart';
 import 'package:flutter/material.dart';
+
+import '../../shared/components/components.dart';
 
 class BranchInventory extends StatelessWidget {
   final Branch branch;
@@ -22,6 +25,16 @@ class BranchInventory extends StatelessWidget {
         itemBuilder: (context, index) => parentItem(
             item: branch.parentItems[index], size: size, theme: textTheme),
         itemCount: branch.parentItems.length,
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: carrebianCurrent,
+        onPressed: () {
+          navigateTo(context, AddItem());
+        },
+        child: Icon(
+          Icons.add,
+          color: lavendarBlush,
+        ),
       ),
     );
   }

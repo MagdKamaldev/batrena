@@ -99,13 +99,13 @@ class _HomeLayoutState extends State<HomeLayout> {
             ),
           ),
           floatingActionButton: FloatingActionButton(
-            backgroundColor: lavendarBlush,
+            backgroundColor: carrebianCurrent,
             onPressed: () {
               navigateTo(context, BranchDetails());
             },
             child: Icon(
               Icons.add,
-              color: carrebianCurrent,
+              color: lavendarBlush,
             ),
           ),
         );
