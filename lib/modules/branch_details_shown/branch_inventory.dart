@@ -36,29 +36,32 @@ class BranchInventory extends StatelessWidget {
       height: size.height * 0.115,
       child: Card(
         elevation: 2,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Text(
-              item.name,
-              style: theme.bodyLarge!
-                  .copyWith(fontSize: 20, color: raisinBlack.shade300),
-            ),
-            Row(
-              children: [
-                Text(
-                  item.price.toString(),
-                  style: theme.bodyLarge!
-                      .copyWith(fontSize: 20, color: raisinBlack),
-                ),
-                Text(
-                  "    (${item.items.length})",
-                  style: theme.bodyLarge!
-                      .copyWith(fontSize: 20, color: Colors.black),
-                ),
-              ],
-            )
-          ],
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                item.name,
+                style: theme.bodyLarge!
+                    .copyWith(fontSize: 20, color: raisinBlack.shade900),
+              ),
+              Row(
+                children: [
+                  Text(
+                    "${item.price} LE",
+                    style: theme.bodyLarge!
+                        .copyWith(fontSize: 20, color: Colors.grey[700]),
+                  ),
+                  Text(
+                    "    (${item.items.length})",
+                    style: theme.bodyLarge!
+                        .copyWith(fontSize: 20, color: raisinBlack),
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
