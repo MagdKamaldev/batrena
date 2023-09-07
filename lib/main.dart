@@ -8,10 +8,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'cubit/home_cubit/app_cubit.dart';
 import 'cubit/login_cubit/login_cubit.dart';
+import 'package:flutter_rust_bridge/flutter_rust_bridge.dart' as bridge;
+import 'dart:ffi';
+import 'bridge_generated.dart';
 
 String? jwt = "";
+late DynamicLibrary lib;
+late ImagePixelReplacerImpl impl;
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  lib = bridge.loadLibForFlutter("libImagePixelReplacer.so");
+  // lib = DynamicLibrary.process();
+  impl = ImagePixelReplacerImpl(lib);
   DioHelper.init();
   await CacheHelper.init();
   runApp(const MyApp());
