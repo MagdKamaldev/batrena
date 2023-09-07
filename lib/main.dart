@@ -1,4 +1,5 @@
 import 'package:batrena/cubit/add_branch/add_branch_cubit.dart';
+import 'package:batrena/cubit/add_item/add_item_cubit.dart';
 import 'package:batrena/cubit/branch_details_cubit/branch_details_cubit.dart';
 import 'package:batrena/modules/login/login_screen.dart';
 import 'package:batrena/shared/networks/local/cache_helper.dart';
@@ -35,7 +36,9 @@ class MyApp extends StatelessWidget {
         }),
         BlocProvider(create: (context) {
           return BranchDetailsCubit();
-        
+        }),
+        BlocProvider(create: (context) {
+          return AddItemCubit();
         }),
       ],
       child: BlocConsumer<AppCubit, AppStates>(

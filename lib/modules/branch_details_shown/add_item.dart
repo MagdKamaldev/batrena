@@ -11,9 +11,11 @@ class AddItem extends StatelessWidget {
 
   var nameController = TextEditingController();
   var priceController = TextEditingController();
+  var quantityController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    var cubit = AddItemCubit.get(context);
     var size = MediaQuery.of(context).size;
     var textTheme = Theme.of(context).textTheme;
     return BlocConsumer<AddItemCubit, AddItemStates>(
@@ -32,7 +34,7 @@ class AddItem extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  "Please Enter Item details",
+                  "Please enter Item details",
                   style: textTheme.bodyLarge!.copyWith(color: raisinBlack),
                 ),
                 SizedBox(
@@ -65,6 +67,100 @@ class AddItem extends StatelessWidget {
                     label: "Price",
                     prefix: Icons.monetization_on_rounded,
                     context: context),
+                SizedBox(
+                  height: size.height * 0.08,
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    "Select quantity",
+                    style: textTheme.bodyLarge!.copyWith(color: raisinBlack),
+                  ),
+                ),
+                SizedBox(
+                  height: size.height * 0.02,
+                ),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: size.width * 0.4,
+                      height: size.height * 0.1,
+                      child: Card(
+                        elevation: 2.0,
+                        color: carrebianCurrent,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              IconButton(
+                                onPressed: cubit.incrementQuantity,
+                                icon: Icon(
+                                  Icons.add,
+                                  color: celeste,
+                                ),
+                              ),
+                              const Spacer(),
+                              Text(
+                                cubit.quantity.toString(),
+                                style: textTheme.bodyLarge,
+                              ),
+                              const Spacer(),
+                              IconButton(
+                                onPressed: cubit.decrementQuantity,
+                                icon: Icon(
+                                  Icons.remove,
+                                  color: celeste,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    const Spacer(),
+                    Text(
+                      "OR",
+                      style:
+                          textTheme.titleMedium!.copyWith(color: raisinBlack),
+                    ),
+                    const Spacer(),
+                    SizedBox(
+                      width: size.width * 0.35,
+                      height: size.height * 0.079,
+                      child: defaultFormField(
+                        controller: quantityController,
+                        type: TextInputType.number,
+                        onSubmit: () {},
+                        validate: () {},
+                        label: "Quantity",
+                        prefix: Icons.numbers,
+                        context: context,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: size.height * 0.14,
+                ),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: SizedBox(
+                    width: size.width * 0.8,
+                    height: size.height * 0.08,
+                    child: MaterialButton(
+                      color: carrebianCurrent,
+                      onPressed: () {},
+                      child: Text(
+                        "Add to inventory",
+                        style: textTheme.bodyLarge,
+                      ),
+                    ),
+                  ),
+                )
               ],
             ),
           ),
