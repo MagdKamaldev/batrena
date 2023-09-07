@@ -34,12 +34,22 @@ class AddItemCubit extends Cubit<AddItemStates> {
     required Branch branch,
   }) {
     emit(AddToInventoryLoadingState());
+
     List<Item> items = [];
     for (int i = 0; i < quantity; i++) {
       items.add(Item(isSold: false, name: name, price: price));
     }
-    branch.parentItems.add(ParentItem(
-        branchId: branch.id, name: name, price: price, items: items));
+
+    final newParentItem = ParentItem(
+      branchId: branch.id,
+      name: name,
+      price: price,
+      items: items,
+    );
+
+    // Add the new ParentItem instance to the parentItems list
+    branch.parentItems.add(newParentItem);
+
     DioHelper.postData(jwt: jwt, url: EndPoints.updateBranch, data: {
       "ID": branch.id,
       "name": branch.name,
@@ -48,14 +58,14 @@ class AddItemCubit extends Cubit<AddItemStates> {
         "lat": branch.latLng.lat,
         "lng": branch.latLng.lng,
       },
-      "parent_items": branch.parentItems,
+      "parent_items":
+          branch.parentItems.map((parentItem) => parentItem.toJson()).toList(),
     }).then((value) {
       showCustomSnackBar(
-          context,
-          value.data["message"],
-          value.data["message"] == "Branch Updated"
-              ? Colors.green
-              : Colors.red);
+        context,
+        value.data["message"],
+        value.data["message"] == "Branch Updated" ? Colors.green : Colors.red,
+      );
     });
   }
 }

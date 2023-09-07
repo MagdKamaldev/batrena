@@ -29,7 +29,7 @@ class BranchInventory extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         backgroundColor: carrebianCurrent,
         onPressed: () {
-          navigateTo(context, AddItem());
+          navigateTo(context, AddItem(branch: branch,));
         },
         child: Icon(
           Icons.add,
