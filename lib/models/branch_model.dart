@@ -24,9 +24,21 @@ class LatLng {
       updatedAt: json['UpdatedAt'],
       deletedAt: json['DeletedAt'],
       branchId: json['branch_id'],
-      lat: json['lat'].toDouble(), // Parse 'lat' as double
-      lng: json['lng'].toDouble(), // Parse 'lng' as double
+      lat: json['lat'].toDouble(),
+      lng: json['lng'].toDouble(),
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'ID': id,
+      'CreatedAt': createdAt,
+      'UpdatedAt': updatedAt,
+      'DeletedAt': deletedAt,
+      'branch_id': branchId,
+      'lat': lat,
+      'lng': lng,
+    };
   }
 }
 
@@ -60,25 +72,31 @@ class HeatMap {
       totalSold: json['total_sold'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'ID': id,
+      'CreatedAt': createdAt,
+      'UpdatedAt': updatedAt,
+      'DeletedAt': deletedAt,
+      'branch_id': branchId,
+      'value': value,
+      'total_sold': totalSold,
+    };
+  }
 }
 
 class Item {
-  int id;
-  String createdAt;
-  String updatedAt;
-  dynamic deletedAt;
-  int parentItemId;
-  String name;
+  int? id;
+  int? parentItemId;
+  String? name;
   int price;
   bool isSold;
 
   Item({
-    required this.id,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.deletedAt,
-    required this.parentItemId,
-    required this.name,
+    this.id,
+    this.parentItemId,
+    this.name,
     required this.price,
     required this.isSold,
   });
@@ -86,32 +104,33 @@ class Item {
   factory Item.fromJson(Map<String, dynamic> json) {
     return Item(
       id: json['ID'],
-      createdAt: json['CreatedAt'],
-      updatedAt: json['UpdatedAt'],
-      deletedAt: json['DeletedAt'],
       parentItemId: json['parent_item_id'],
       name: json['name'] ?? "",
       price: json['price'],
       isSold: json['is_sold'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'ID': id,
+      'parent_item_id': parentItemId,
+      'name': name,
+      'price': price,
+      'is_sold': isSold,
+    };
+  }
 }
 
 class ParentItem {
-  int id;
-  String createdAt;
-  String updatedAt;
-  dynamic deletedAt;
+  int? id;
   int branchId;
   String name;
   int price;
   List<Item> items;
 
   ParentItem({
-    required this.id,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.deletedAt,
+    this.id,
     required this.branchId,
     required this.name,
     required this.price,
@@ -125,14 +144,21 @@ class ParentItem {
 
     return ParentItem(
       id: json['ID'],
-      createdAt: json['CreatedAt'],
-      updatedAt: json['UpdatedAt'],
-      deletedAt: json['DeletedAt'],
       branchId: json['branch_id'],
       name: json['name'],
-      price: json['price'], // Parse 'price' as int
+      price: json['price'],
       items: itemList,
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'ID': id,
+      'branch_id': branchId,
+      'name': name,
+      'price': price,
+      'items': items.map((item) => item.toJson()).toList(),
+    };
   }
 }
 
@@ -179,5 +205,20 @@ class Branch {
       transactions: json['transactions'],
       heatMap: HeatMap.fromJson(json['heat_map']),
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'ID': id,
+      'CreatedAt': createdAt,
+      'UpdatedAt': updatedAt,
+      'DeletedAt': deletedAt,
+      'name': name,
+      'address': address,
+      'lat_lng': latLng.toJson(),
+      'parent_items': parentItems.map((item) => item.toJson()).toList(),
+      'transactions': transactions,
+      'heat_map': heatMap.toJson(),
+    };
   }
 }
