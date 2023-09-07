@@ -1,3 +1,4 @@
+import 'package:batrena/cubit/home_cubit/app_cubit.dart';
 import 'package:batrena/main.dart';
 import 'package:batrena/models/branch_model.dart';
 import 'package:batrena/shared/components/components.dart';
@@ -66,6 +67,7 @@ class AddItemCubit extends Cubit<AddItemStates> {
         value.data["message"],
         value.data["message"] == "Branch Updated" ? Colors.green : Colors.red,
       );
+      AppCubit.get(context).fetchBranches();
     });
   }
 }
