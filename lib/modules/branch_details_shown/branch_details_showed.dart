@@ -1,10 +1,9 @@
-import 'package:batrena/cubit/branch_details_cubit/branch_details_cubit.dart';
 import 'package:batrena/models/branch_model.dart';
 import 'package:batrena/modules/branch_details_shown/branch_inventory.dart';
 import 'package:batrena/shared/colors.dart';
 import 'package:batrena/shared/components/components.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 
 class BranchDetailsShown extends StatelessWidget {
   final Branch branch;
@@ -14,9 +13,7 @@ class BranchDetailsShown extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     var textTheme = Theme.of(context).textTheme;
-    return BlocConsumer<BranchDetailsCubit, BranchDetailsState>(
-      listener: (context, state) {},
-      builder: (context, state) {
+   
         return Scaffold(
           appBar: AppBar(
             iconTheme: IconThemeData(color: lavendarBlush),
@@ -124,7 +121,6 @@ class BranchDetailsShown extends StatelessWidget {
             ],
           ),
         );
-      },
-    );
+      
   }
 }
