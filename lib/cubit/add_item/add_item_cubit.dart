@@ -47,8 +47,7 @@ class AddItemCubit extends Cubit<AddItemStates> {
       price: price,
       items: items,
     );
-
-    // Add the new ParentItem instance to the parentItems list
+    
     branch.parentItems.add(newParentItem);
 
     DioHelper.postData(jwt: jwt, url: EndPoints.updateBranch, data: {
@@ -68,6 +67,8 @@ class AddItemCubit extends Cubit<AddItemStates> {
         value.data["message"] == "Branch Updated" ? Colors.green : Colors.red,
       );
       AppCubit.get(context).fetchBranches();
+      Navigator.pop(context);
+      emit(AddToInventorySuccessState());
     });
   }
 }

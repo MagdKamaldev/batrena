@@ -2,6 +2,7 @@
 import 'package:batrena/models/branch_model.dart';
 import 'package:batrena/shared/colors.dart';
 import 'package:batrena/shared/components/components.dart';
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../cubit/add_item/add_item_cubit.dart';
@@ -147,32 +148,38 @@ class AddItem extends StatelessWidget {
                 SizedBox(
                   height: size.height * 0.1,
                 ),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: SizedBox(
-                    width: size.width * 0.8,
-                    height: size.height * 0.08,
-                    child: MaterialButton(
-                      color: carrebianCurrent,
-                      onPressed: () {
-                        if (nameController.text.isNotEmpty ||
-                            priceController.text.isNotEmpty) {
-                          AddItemCubit.get(context).addParentItemToInventory(
-                              name: nameController.text,
-                              price: int.parse(priceController.text),
-                              quantity: quantityController.text.isEmpty
-                                  ? AddItemCubit.get(context).quantity
-                                  : int.parse(quantityController.text),
-                              context: context,
-                              branch: branch);
-                        } else {
-                          showCustomSnackBar(context,
-                              "Required fields are empty !", Colors.red);
-                        }
-                      },
-                      child: Text(
-                        "Add to inventory",
-                        style: textTheme.bodyLarge,
+                ConditionalBuilder(
+                  condition: state is! AddToInventoryLoadingState,
+                  fallback: (context) => const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                  builder: (context) => ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: SizedBox(
+                      width: size.width * 0.8,
+                      height: size.height * 0.08,
+                      child: MaterialButton(
+                        color: carrebianCurrent,
+                        onPressed: () {
+                          if (nameController.text.isNotEmpty ||
+                              priceController.text.isNotEmpty) {
+                            AddItemCubit.get(context).addParentItemToInventory(
+                                name: nameController.text,
+                                price: int.parse(priceController.text),
+                                quantity: quantityController.text.isEmpty
+                                    ? AddItemCubit.get(context).quantity
+                                    : int.parse(quantityController.text),
+                                context: context,
+                                branch: branch);
+                          } else {
+                            showCustomSnackBar(context,
+                                "Required fields are empty !", Colors.red);
+                          }
+                        },
+                        child: Text(
+                          "Add to inventory",
+                          style: textTheme.bodyLarge,
+                        ),
                       ),
                     ),
                   ),
