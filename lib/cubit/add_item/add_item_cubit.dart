@@ -35,7 +35,7 @@ class AddItemCubit extends Cubit<AddItemStates> {
   }) {
     emit(AddToInventoryLoadingState());
     List<Item> items = [];
-    for (int i = 0; i <= quantity; i++) {
+    for (int i = 0; i < quantity; i++) {
       items.add(Item(isSold: false, name: name, price: price));
     }
     branch.parentItems.add(ParentItem(
