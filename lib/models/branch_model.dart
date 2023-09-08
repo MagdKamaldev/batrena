@@ -122,14 +122,14 @@ class Item {
 
 class ParentItem {
   int? id;
-  int branchId;
+  int? branchId;
   String name;
   double price;
   List<Item> items;
 
   ParentItem({
     this.id,
-    required this.branchId,
+    this.branchId,
     required this.name,
     required this.price,
     required this.items,
@@ -169,7 +169,8 @@ class Branch {
   List<ParentItem> parentItems;
   List<dynamic>? transactions;
   HeatMap heatMap;
-
+  int totalSold;
+  int soldToday;
   Branch({
     required this.id,
     required this.createdAt,
@@ -181,14 +182,17 @@ class Branch {
     required this.parentItems,
     required this.transactions,
     required this.heatMap,
+    required this.totalSold,
+    required this.soldToday,
   });
 
   factory Branch.fromJson(Map<String, dynamic> json) {
+    print("parentItemList");
     var parentItemJsonList = json['parent_items'] as List;
     List<ParentItem> parentItemList = parentItemJsonList
         .map((parentItem) => ParentItem.fromJson(parentItem))
         .toList();
-
+    print(parentItemJsonList);
     return Branch(
       id: json['ID'],
       createdAt: json['CreatedAt'],
@@ -200,6 +204,8 @@ class Branch {
       parentItems: parentItemList,
       transactions: json['transactions'],
       heatMap: HeatMap.fromJson(json['heat_map']),
+      totalSold: json['total_sold'],
+      soldToday: json['sold_today'],
     );
   }
 

@@ -1,20 +1,68 @@
 import 'package:batrena/main.dart';
 import 'package:batrena/models/branch_model.dart';
+import 'package:batrena/shared/components/components.dart';
 import 'package:batrena/shared/networks/remote/dio_helper.dart';
+import 'package:batrena/shared/networks/remote/end_points.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 part 'branch_view_state.dart';
 
 class BranchViewCubit extends Cubit<BranchViewStates> {
   BranchViewCubit() : super(BranchViewInitial());
-   static BranchViewCubit get(context) => BlocProvider.of(context);
+  static BranchViewCubit get(context) => BlocProvider.of(context);
 
-    late Branch branch;
+  late Branch branch;
 
   Future<bool> get loadData async {
-    await DioHelper.getData(url: "protected/FetchBranchData", jwt: jwt)
+    await DioHelper.getData(url: EndPoints.fetchBranchData, jwt: jwt)
         .then((value) {
       branch = Branch.fromJson(value.data);
     });
     return true;
+  }
+
+  List<Item> cartItems = [];
+  List<ParentItem> parentItems = [];
+  void addTocart({
+    required Item item,
+    required ParentItem parent,
+    required BuildContext context,
+  }) {
+    bool isAdded = false;
+    for (ParentItem parentItem in parentItems) {
+      if (parentItem.id == item.parentItemId) {
+        parentItem.items.add(item);
+        isAdded = true;
+      }
+    }
+    if (!isAdded) {
+      parentItems.add(ParentItem(
+          id: item.parentItemId,
+          price: item.price,
+          name: parent.name,
+          items: [item]));
+    }
+    cartItems.add(item);
+    parent.items.remove(item);
+    showCustomSnackBar(context, "Added Successfully", Colors.green);
+    emit(AddToCart());
+  }
+
+  List<Map<String, int>> itemIds = [];
+  void checkout(context) {
+    emit(CheckOutLoadingState());
+
+    for (Item item in cartItems) {
+      itemIds.add({"ID": item.id!});
+    }
+
+    DioHelper.postData(url: EndPoints.registerTransaction, jwt: jwt, data: {
+      "items": itemIds,
+    }).then((value) {
+      showCustomSnackBar(context, value.data["message"], Colors.green);
+      emit(CheckOutSuccessState());
+    }).catchError((error) {
+      emit(CheckOutErrorState());
+    });
   }
 }
