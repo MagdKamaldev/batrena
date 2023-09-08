@@ -1,5 +1,6 @@
 import 'package:batrena/cubit/add_branch/add_branch_cubit.dart';
 import 'package:batrena/cubit/add_item/add_item_cubit.dart';
+import 'package:batrena/cubit/heat_map/heat_map_cubit.dart';
 import 'package:batrena/modules/login/login_screen.dart';
 import 'package:batrena/shared/networks/local/cache_helper.dart';
 import 'package:batrena/shared/networks/remote/dio_helper.dart';
@@ -44,6 +45,9 @@ class MyApp extends StatelessWidget {
         }),
         BlocProvider(create: (context) {
           return AddItemCubit();
+        }),
+         BlocProvider(create: (context) {
+          return HeatMapCubit();
         }),
       ],
       child: BlocConsumer<AppCubit, AppStates>(
