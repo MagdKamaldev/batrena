@@ -6,10 +6,10 @@ class DioHelper {
   static init() {
     dio = Dio(
       BaseOptions(
-          baseUrl: "http://192.168.50.208:3006/api/",
+          baseUrl: "http://165.22.31.49:3006/api/",
           receiveDataWhenStatusError: true,
           headers: {
-            "Content-Type":"application/json",
+            "Content-Type": "application/json",
           }),
     );
   }
@@ -34,10 +34,9 @@ class DioHelper {
     required String url,
     Map<String, dynamic>? query,
     required Map<String, dynamic> data,
-      String? jwt,
+    String? jwt,
   }) async {
     dio!.options.headers = {
-      
       "Authorization": "Bearer $jwt",
       "Content-Type": "application/json",
     };
@@ -55,7 +54,7 @@ class DioHelper {
     required Map<String, dynamic> data,
     String? jwt,
   }) async {
-    dio!.options.headers = {      
+    dio!.options.headers = {
       "Authorization": "Bearer $jwt",
       "Content-Type": "application/json",
     };
@@ -67,14 +66,13 @@ class DioHelper {
     );
   }
 
-   static Future<Response> deleteData({
+  static Future<Response> deleteData({
     required String url,
     Map<String, dynamic>? query,
     required Map<String, dynamic> data,
     String? jwt,
   }) async {
-    dio!.options.headers ={
-      
+    dio!.options.headers = {
       "Authorization": "Bearer $jwt",
       "Content-Type": "application/json",
     };

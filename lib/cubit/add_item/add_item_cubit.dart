@@ -29,7 +29,7 @@ class AddItemCubit extends Cubit<AddItemStates> {
 
   void addParentItemToInventory({
     required String name,
-    required int price,
+    required double price,
     required int quantity,
     required BuildContext context,
     required Branch branch,
@@ -48,7 +48,7 @@ class AddItemCubit extends Cubit<AddItemStates> {
       items: items,
     );
     branch.parentItems.add(newParentItem);
-    print( branch.parentItems.map((parentItem) => parentItem.toJson()).toList());
+    print(branch.parentItems.map((parentItem) => parentItem.toJson()).toList());
     DioHelper.postData(jwt: jwt, url: EndPoints.updateBranch, data: {
       "ID": branch.id,
       "name": branch.name,

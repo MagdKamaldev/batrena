@@ -165,7 +165,7 @@ class AddItem extends StatelessWidget {
                               priceController.text.isNotEmpty) {
                             AddItemCubit.get(context).addParentItemToInventory(
                                 name: nameController.text,
-                                price: int.parse(priceController.text),
+                                price: double.parse(priceController.text),
                                 quantity: quantityController.text.isEmpty
                                     ? AddItemCubit.get(context).quantity
                                     : int.parse(quantityController.text),

@@ -90,7 +90,7 @@ class Item {
   int? id;
   int? parentItemId;
   String? name;
-  int price;
+  double price;
   bool isSold;
 
   Item({
@@ -106,7 +106,7 @@ class Item {
       id: json['ID'],
       parentItemId: json['parent_item_id'],
       name: json['name'] ?? "",
-      price: json['price'],
+      price: double.parse(json['price'].toString()),
       isSold: json['is_sold'],
     );
   }
@@ -124,7 +124,7 @@ class ParentItem {
   int? id;
   int branchId;
   String name;
-  int price;
+  double price;
   List<Item> items;
 
   ParentItem({
@@ -144,7 +144,7 @@ class ParentItem {
       id: json['ID'],
       branchId: json['branch_id'],
       name: json['name'],
-      price: json['price'],
+      price: double.parse(json['price'].toString()),
       items: itemList,
     );
   }
@@ -167,7 +167,7 @@ class Branch {
   String address;
   LatLng latLng;
   List<ParentItem> parentItems;
-  List<dynamic> transactions;
+  List<dynamic>? transactions;
   HeatMap heatMap;
 
   Branch({

@@ -1,6 +1,6 @@
 // ignore_for_file: must_be_immutable
 import 'package:batrena/main.dart';
-import 'package:batrena/modules/branch_screens/branch_homescreen.dart';
+import 'package:batrena/modules/branch_screens/branch_home_screen.dart';
 import 'package:batrena/modules/home/home_layout.dart';
 import 'package:batrena/shared/colors.dart';
 import 'package:batrena/shared/components/components.dart';
