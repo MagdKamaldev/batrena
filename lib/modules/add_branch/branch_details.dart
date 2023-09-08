@@ -13,7 +13,8 @@ class BranchDetails extends StatelessWidget {
   BranchDetails({super.key});
 
   var nameController = TextEditingController();
-  var adressController = TextEditingController();
+  var addressController = TextEditingController();
+  var passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -177,11 +178,29 @@ class BranchDetails extends StatelessWidget {
                         label: "Branch Name",
                         prefix: Icons.coffee,
                         context: context),
-                    SizedBox(
-                      height: size.height * 0.04,
-                    ),
+
                     Text(
-                      "Adress",
+                      "Password",
+                      style:
+                      textTheme.bodyLarge!.copyWith(color: raisinBlack),
+                    ),
+                    SizedBox(
+                      height: size.height * 0.01,
+                    ),
+                    defaultFormField(
+                        controller: passwordController,
+                        type: TextInputType.name,
+                        onSubmit: () {},
+                        validate: (String text) {
+                          if (text.isEmpty) {
+                            return "Password must not be empty";
+                          }
+                        },
+                        label: "Branch Password",
+                        prefix: Icons.password,
+                        context: context),
+                    Text(
+                      "Address",
                       style:
                           textTheme.bodyLarge!.copyWith(color: raisinBlack),
                     ),
@@ -189,19 +208,19 @@ class BranchDetails extends StatelessWidget {
                       height: size.height * 0.01,
                     ),
                     defaultFormField(
-                        controller: adressController,
+                        controller: addressController,
                         type: TextInputType.name,
                         onSubmit: () {},
                         validate: (String text) {
                           if (text.isEmpty) {
-                            return "Adress must not be empty";
+                            return "Address must not be empty";
                           }
                         },
-                        label: "Branch Adress",
+                        label: "Branch Address",
                         prefix: Icons.map_outlined,
                         context: context),
                     SizedBox(
-                      height: size.height * 0.05,
+                      height: size.height * 0.03,
                     ),
                     ConditionalBuilder(
                       condition: state is! AddBranchLoadingState,
@@ -215,10 +234,11 @@ class BranchDetails extends StatelessWidget {
                           ),
                           child: MaterialButton(
                             onPressed: () {
-                              if (nameController.text.isNotEmpty && adressController.text.isNotEmpty&& cubit.branchPosition != null) {
+                              if (nameController.text.isNotEmpty && addressController.text.isNotEmpty&& cubit.branchPosition != null) {
                                 cubit.addBranch(
                                     name: nameController.text,
-                                    adress: adressController.text,
+                                    password: passwordController.text,
+                                    address: addressController.text,
                                     lat: cubit.branchPosition!.latitude,
                                     long: cubit.branchPosition!.longitude,
                                     context: context);
@@ -226,7 +246,7 @@ class BranchDetails extends StatelessWidget {
                             },
                             color: carrebianCurrent,
                             child: Text(
-                              "Confirm branch",
+                              "Register Branch",
                               style: textTheme.bodyLarge,
                             ),
                           ),
@@ -235,6 +255,9 @@ class BranchDetails extends StatelessWidget {
                       fallback: (context) => const Center(
                         child: CircularProgressIndicator(),
                       ),
+                    ),
+                    SizedBox(
+                      height: size.height * 0.03,
                     ),
                   ]),
             ),

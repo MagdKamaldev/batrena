@@ -14,6 +14,7 @@ import 'dart:ffi';
 import 'bridge_generated.dart';
 
 String? jwt = "";
+int? permission = 0;
 late DynamicLibrary lib;
 late ImagePixelReplacerImpl impl;
 

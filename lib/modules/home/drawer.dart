@@ -9,16 +9,20 @@ class AppDrawer extends StatelessWidget {
     return Drawer(
       child: Column(
         children: [
+          const SizedBox(
+            height: 30,
+          ),
           ElevatedButton(onPressed: () {
             Navigator.push(context, MaterialPageRoute(builder: (_) => HeatMapScreen()));
-          }, child: Container(
+          }, child: const SizedBox(
             height: 40,
             width: double.infinity,
-            color: Colors.red,
-            child: Text(
-              "Heat Map"
+            child: Center(
+              child: Text(
+                "Heat Map"
+              ),
             ),
-          ),)
+          ),),
         ],
       ),
     );

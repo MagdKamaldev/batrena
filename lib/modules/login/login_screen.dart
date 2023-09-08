@@ -1,4 +1,6 @@
 // ignore_for_file: must_be_immutable
+import 'package:batrena/main.dart';
+import 'package:batrena/modules/branch_screens/branch_homescreen.dart';
 import 'package:batrena/modules/home/home_layout.dart';
 import 'package:batrena/shared/colors.dart';
 import 'package:batrena/shared/components/components.dart';
@@ -22,7 +24,11 @@ class LoginScreen extends StatelessWidget {
     return BlocConsumer<LoginCubit, LoginStates>(
       listener: (context, state) {
         if (state is LoginSuccessState) {
-          navigateAndFinish(context, HomeLayout());
+          if (permission == 2) {
+            navigateAndFinish(context, const HomeLayout());
+          } else if (permission == 1) {
+            navigateAndFinish(context, BranchHomeScreen());
+          }
         }
       },
       builder: (context, state) {

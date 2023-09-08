@@ -92,7 +92,8 @@ class AddBranchCubit extends Cubit<AddBranchState> {
 
   void addBranch({
     required String name,
-    required String adress,
+    required String password,
+    required String address,
     required double lat,
     required double long,
     required BuildContext context,
@@ -100,11 +101,12 @@ class AddBranchCubit extends Cubit<AddBranchState> {
     emit(AddBranchLoadingState());
     DioHelper.postData(url: EndPoints.registerBranch, jwt: jwt, data: {
       "name": name,
+      "password": password,
       "lat_lng": {
         "lat": lat,
         "lng": long,
       },
-      "address": adress,
+      "address": address,
     }).then((value) {
       AppCubit.get(context).fetchBranches();
       showCustomSnackBar(

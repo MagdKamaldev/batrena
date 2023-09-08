@@ -18,6 +18,7 @@ class LoginCubit extends Cubit<LoginStates> {
       "password": password,
     }).then((value) {
       jwt = value.data["jwt"];
+      permission = value.data["permission"];
       emit(LoginSuccessState());
     }).catchError((error) {
       print(error.toString());

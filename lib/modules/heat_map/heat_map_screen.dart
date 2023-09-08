@@ -5,11 +5,22 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 
-class HeatMapScreen extends StatelessWidget {
+class HeatMapScreen extends StatefulWidget {
  
+  @override
+  State<HeatMapScreen> createState() => _HeatMapScreenState();
+}
+
+class _HeatMapScreenState extends State<HeatMapScreen> {
+  @override
+  void initState() {
+    clearData();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     var cubit = HeatMapCubit.get(context);
+
     return BlocConsumer<HeatMapCubit, HeatMapStates>(
       listener: (context, state) {},
       builder: (context, state) {
@@ -18,14 +29,9 @@ class HeatMapScreen extends StatelessWidget {
             future: cubit.loadData,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                cubit.kGooglePlex = CameraPosition(
-                  target: LatLng(cubit.markers.first.position.latitude,
-                      cubit.markers.first.position.longitude),
-                  zoom: 14.4746,
-                );
                 return GoogleMap(
-                  circles: cubit.circles,
-                  markers: cubit.markers,
+                  circles: circles,
+                  markers: markers,
                   initialCameraPosition: cubit.kGooglePlex,
                   onMapCreated: cubit.onMapCreated,
                   onCameraMove: cubit.onCameraMove,

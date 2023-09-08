@@ -135,7 +135,7 @@ class _HomeLayoutState extends State<HomeLayout> {
         child: Padding(
           padding: const EdgeInsets.only(top: 12, left: 15, right: 15),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,

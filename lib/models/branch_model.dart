@@ -113,8 +113,6 @@ class Item {
 
   Map<String, dynamic> toJson() {
     return {
-      'ID': id,
-      'parent_item_id': parentItemId,
       'name': name,
       'price': price,
       'is_sold': isSold,
@@ -153,8 +151,6 @@ class ParentItem {
 
   Map<String, dynamic> toJson() {
     return {
-      'ID': id,
-      'branch_id': branchId,
       'name': name,
       'price': price,
       'items': items.map((item) => item.toJson()).toList(),

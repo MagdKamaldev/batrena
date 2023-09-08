@@ -6,7 +6,7 @@ class DioHelper {
   static init() {
     dio = Dio(
       BaseOptions(
-          baseUrl: "http://165.22.31.49:3006/api/",
+          baseUrl: "http://192.168.50.208:3006/api/",
           receiveDataWhenStatusError: true,
           headers: {
             "Content-Type":"application/json",
@@ -21,7 +21,6 @@ class DioHelper {
     String? jwt,
   }) async {
     dio!.options.headers = {
-      
       "Authorization": "Bearer $jwt",
       "Content-Type": "application/json",
     };
