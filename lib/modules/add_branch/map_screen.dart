@@ -63,8 +63,8 @@ class _MapScreenState extends State<MapScreen> {
             onTap: () {
               cubit.setBranchLocation(cubit.myMarkers.first.position.latitude,
                   cubit.myMarkers.first.position.longitude);
-
-              showSetLoactionSuccess(context, size.height, size.width,textTheme);
+              showSetLoactionSuccess(
+                  context, size.height, size.width, textTheme);
             },
             child: Container(
               color: carrebianCurrent,

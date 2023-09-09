@@ -1,6 +1,7 @@
 import 'package:batrena/cubit/branch_view/branch_view_cubit.dart';
 import 'package:batrena/models/branch_model.dart';
 import 'package:batrena/shared/colors.dart';
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -33,18 +34,22 @@ class CartScreen extends StatelessWidget {
               ),
             ],
           ),
-          bottomNavigationBar: Container(
-              color: carrebianCurrent,
-              width: 20,
-              height: MediaQuery.of(context).size.height * 0.08,
-              child: TextButton(
-                  onPressed: () {
-                    cubit.checkout(context);
-                  },
-                  child: Text(
-                    "Chekout",
-                    style: textTheme.bodyLarge,
-                  ))),
+          bottomNavigationBar: ConditionalBuilder(
+            condition: state is ! CheckOutLoadingState,
+            builder: (context) =>  Container(
+                color: carrebianCurrent,
+                width: 20,
+                height: MediaQuery.of(context).size.height * 0.08,
+                child: TextButton(
+                    onPressed: () {
+                      cubit.checkout(context);
+                    },
+                    child: Text(
+                      "Chekout",
+                      style: textTheme.bodyLarge,
+                    ))),
+            fallback: (context) => const Center(child: CircularProgressIndicator(),),
+          ),
         );
       },
     );

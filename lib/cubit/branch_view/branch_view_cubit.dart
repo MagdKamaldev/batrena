@@ -59,7 +59,12 @@ class BranchViewCubit extends Cubit<BranchViewStates> {
     DioHelper.postData(url: EndPoints.registerTransaction, jwt: jwt, data: {
       "items": itemIds,
     }).then((value) {
+      cartItems.clear();
+      parentItems.clear();
       showCustomSnackBar(context, value.data["message"], Colors.green);
+      Navigator.pop(context);
+      Navigator.pop(context);
+
       emit(CheckOutSuccessState());
     }).catchError((error) {
       emit(CheckOutErrorState());
