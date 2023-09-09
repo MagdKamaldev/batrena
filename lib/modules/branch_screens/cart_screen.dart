@@ -62,7 +62,7 @@ class CartScreen extends StatelessWidget {
       required TextTheme theme,
       required BuildContext context}) {
     var size = MediaQuery.of(context).size;
-    bool isMobile = size.width <= 400;
+    bool isMobile = size.width <= 600;
     return SizedBox(
       width: size.width * 0.8,
       height: size.height * 0.13,

@@ -11,7 +11,6 @@ class BranchInventory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
     var textTheme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: AppBar(
@@ -23,13 +22,19 @@ class BranchInventory extends StatelessWidget {
       ),
       body: ListView.builder(
         itemBuilder: (context, index) => parentItem(
-            item: branch.parentItems[index], size: size, theme: textTheme),
+            item: branch.parentItems[index],
+            theme: textTheme,
+            context: context),
         itemCount: branch.parentItems.length,
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: carrebianCurrent,
         onPressed: () {
-          navigateTo(context, AddItem(branch: branch,));
+          navigateTo(
+              context,
+              AddItem(
+                branch: branch,
+              ));
         },
         child: Icon(
           Icons.add,
@@ -39,14 +44,15 @@ class BranchInventory extends StatelessWidget {
     );
   }
 
-  Widget parentItem({
-    required ParentItem item,
-    required size,
-    required TextTheme theme,
-  }) {
+  Widget parentItem(
+      {required ParentItem item,
+      required TextTheme theme,
+      required BuildContext context}) {
+    var size = MediaQuery.of(context).size;
+    bool isMobile = size.width <= 600;
     return SizedBox(
       width: size.width * 0.8,
-      height: size.height * 0.115,
+      height: size.height * 0.13,
       child: Card(
         elevation: 2,
         child: Padding(
@@ -54,22 +60,31 @@ class BranchInventory extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                item.name,
-                style: theme.bodyLarge!
-                    .copyWith(fontSize: 20, color: raisinBlack.shade900),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: isMobile ? 2 : 15),
+                child: Text(
+                  item.name,
+                  style: theme.bodyLarge!.copyWith(
+                      fontSize:
+                          isMobile ? size.width * 0.075 : size.width * 0.025,
+                      color: raisinBlack.shade900),
+                ),
               ),
               Row(
                 children: [
                   Text(
                     "${item.price} LE",
-                    style: theme.bodyLarge!
-                        .copyWith(fontSize: 20, color: Colors.grey[700]),
+                    style: theme.bodyLarge!.copyWith(
+                        fontSize:
+                            isMobile ? size.width * 0.068 : size.width * 0.02,
+                        color: Colors.grey[700]),
                   ),
                   Text(
                     "    (${item.items.length})",
-                    style: theme.bodyLarge!
-                        .copyWith(fontSize: 20, color: raisinBlack),
+                    style: theme.bodyLarge!.copyWith(
+                        fontSize:
+                            isMobile ? size.width * 0.068 : size.width * 0.02,
+                        color: raisinBlack),
                   ),
                 ],
               )

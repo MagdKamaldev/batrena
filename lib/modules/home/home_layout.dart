@@ -7,7 +7,6 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../cubit/home_cubit/app_cubit.dart';
-import '../../main.dart';
 import '../../models/branch_model.dart';
 
 class HomeLayout extends StatefulWidget {
@@ -31,7 +30,7 @@ class _HomeLayoutState extends State<HomeLayout> {
     var textTheme = Theme.of(context).textTheme;
     return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {
-        print(jwt);
+        // print(jwt);
       },
       builder: (context, state) {
         return Scaffold(

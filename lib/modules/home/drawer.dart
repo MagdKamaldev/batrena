@@ -1,4 +1,5 @@
 import 'package:batrena/modules/heat_map/heat_map_screen.dart';
+import 'package:batrena/shared/colors.dart';
 import 'package:flutter/material.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -6,23 +7,41 @@ class AppDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+   
+
     return Drawer(
       child: Column(
         children: [
           const SizedBox(
-            height: 30,
+            height: 70,
           ),
-          ElevatedButton(onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (_) => HeatMapScreen()));
-          }, child: const SizedBox(
-            height: 40,
-            width: double.infinity,
-            child: Center(
-              child: Text(
-                "Heat Map"
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => HeatMapScreen()));
+            },
+            child: Container(
+              height: 70,
+              child: Card(
+                elevation: 3,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text(
+                      "Heat Map",
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyLarge!
+                          .copyWith(color: raisinBlack),
+                    ),
+                    const Icon(
+                      Icons.map,
+                    )
+                  ],
+                ),
               ),
             ),
-          ),),
+          ),
         ],
       ),
     );

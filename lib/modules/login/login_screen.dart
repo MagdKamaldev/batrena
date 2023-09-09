@@ -83,6 +83,7 @@ class LoginScreen extends StatelessWidget {
                       defaultFormField(
                           controller: passwordController,
                           type: TextInputType.visiblePassword,
+                          isPassword: cubit.isPassword,
                           onSubmit: () {},
                           validate: (String value) {
                             if (value.isEmpty) {
@@ -92,6 +93,9 @@ class LoginScreen extends StatelessWidget {
                           label: "Password",
                           prefix: Icons.lock,
                           suffix: Icons.remove_red_eye,
+                          suffixPressed: () {
+                            cubit.changePassword();
+                          },
                           context: context),
                       SizedBox(
                         height: size.height * 0.06,

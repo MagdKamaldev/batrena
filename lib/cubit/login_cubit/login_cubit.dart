@@ -8,6 +8,12 @@ class LoginCubit extends Cubit<LoginStates> {
   LoginCubit() : super(LoginInitialState());
   static LoginCubit get(context) => BlocProvider.of(context);
 
+  bool isPassword = true;
+  changePassword() {
+    isPassword = !isPassword;
+    emit(ChangePasswordVisibilityState());
+  }
+
   void login({
     required String username,
     required String password,

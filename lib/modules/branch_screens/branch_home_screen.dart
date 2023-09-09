@@ -14,7 +14,7 @@ class BranchHomeScreen extends StatelessWidget {
     var textTheme = Theme.of(context).textTheme;
     var cubit = BranchViewCubit.get(context);
     var size = MediaQuery.of(context).size;
-    bool isMobile = size.width <= 400 ? true : false;
+    bool isMobile = size.width <= 600;
     double heightRatio = isMobile ? 1.2 : 1.05;
     return FutureBuilder(
         future: cubit.loadData,
@@ -23,9 +23,8 @@ class BranchHomeScreen extends StatelessWidget {
             return BlocConsumer<BranchViewCubit, BranchViewStates>(
                 listener: (context, state) {},
                 builder: (context, state) {
-                  var size = MediaQuery.of(context).size;
                   return Scaffold(
-                    drawer: size.width <= 400
+                    drawer: isMobile
                         ? Drawer(
                             child: Column(
                               children: [
@@ -112,7 +111,8 @@ class BranchHomeScreen extends StatelessWidget {
     var textTheme = Theme.of(context).textTheme;
     var cubit = BranchViewCubit.get(context);
     var size = MediaQuery.of(context).size;
-    bool isMobile = size.width <= 400 ? true : false;
+    bool isMobile = size.width <= 500;
+    print(size.width);
 
     return Container(
       decoration: BoxDecoration(
