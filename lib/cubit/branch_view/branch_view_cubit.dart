@@ -21,6 +21,7 @@ class BranchViewCubit extends Cubit<BranchViewStates> {
     return true;
   }
 
+  double totalPrice = 0.0;
   List<Item> cartItems = [];
   List<ParentItem> parentItems = [];
   void addTocart({
@@ -42,6 +43,7 @@ class BranchViewCubit extends Cubit<BranchViewStates> {
           name: parent.name,
           items: [item]));
     }
+    totalPrice = totalPrice + item.price;
     cartItems.add(item);
     parent.items.remove(item);
     showCustomSnackBar(context, "Added Successfully", Colors.green);
@@ -63,8 +65,6 @@ class BranchViewCubit extends Cubit<BranchViewStates> {
       parentItems.clear();
       showCustomSnackBar(context, value.data["message"], Colors.green);
       Navigator.pop(context);
-      Navigator.pop(context);
-
       emit(CheckOutSuccessState());
     }).catchError((error) {
       emit(CheckOutErrorState());

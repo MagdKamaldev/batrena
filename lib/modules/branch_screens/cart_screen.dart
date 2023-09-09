@@ -29,14 +29,14 @@ class CartScreen extends StatelessWidget {
                 cubit.parentItems.length,
                 (index) => parentItem(
                     item: cubit.parentItems[index],
-                    size: MediaQuery.of(context).size,
-                    theme: textTheme),
+                    theme: textTheme,
+                    context: context),
               ),
             ],
           ),
           bottomNavigationBar: ConditionalBuilder(
-            condition: state is ! CheckOutLoadingState,
-            builder: (context) =>  Container(
+            condition: state is! CheckOutLoadingState,
+            builder: (context) => Container(
                 color: carrebianCurrent,
                 width: 20,
                 height: MediaQuery.of(context).size.height * 0.08,
@@ -45,24 +45,27 @@ class CartScreen extends StatelessWidget {
                       cubit.checkout(context);
                     },
                     child: Text(
-                      "Chekout",
+                      "Chekout (${cubit.totalPrice} EGP)",
                       style: textTheme.bodyLarge,
                     ))),
-            fallback: (context) => const Center(child: CircularProgressIndicator(),),
+            fallback: (context) => const Center(
+              child: CircularProgressIndicator(),
+            ),
           ),
         );
       },
     );
   }
 
-  Widget parentItem({
-    required ParentItem item,
-    required size,
-    required TextTheme theme,
-  }) {
+  Widget parentItem(
+      {required ParentItem item,
+      required TextTheme theme,
+      required BuildContext context}) {
+    var size = MediaQuery.of(context).size;
+    bool isMobile = size.width <= 400;
     return SizedBox(
       width: size.width * 0.8,
-      height: size.height * 0.115,
+      height: size.height * 0.13,
       child: Card(
         elevation: 2,
         child: Padding(
@@ -70,22 +73,31 @@ class CartScreen extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                item.name,
-                style: theme.bodyLarge!
-                    .copyWith(fontSize: 20, color: raisinBlack.shade900),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: isMobile ? 2 : 15),
+                child: Text(
+                  item.name,
+                  style: theme.bodyLarge!.copyWith(
+                      fontSize:
+                          isMobile ? size.width * 0.075 : size.width * 0.025,
+                      color: raisinBlack.shade900),
+                ),
               ),
               Row(
                 children: [
                   Text(
                     "${item.price} LE",
-                    style: theme.bodyLarge!
-                        .copyWith(fontSize: 20, color: Colors.grey[700]),
+                    style: theme.bodyLarge!.copyWith(
+                        fontSize:
+                            isMobile ? size.width * 0.068 : size.width * 0.02,
+                        color: Colors.grey[700]),
                   ),
                   Text(
                     "    (${item.items.length})",
-                    style: theme.bodyLarge!
-                        .copyWith(fontSize: 20, color: raisinBlack),
+                    style: theme.bodyLarge!.copyWith(
+                        fontSize:
+                            isMobile ? size.width * 0.068 : size.width * 0.02,
+                        color: raisinBlack),
                   ),
                 ],
               )

@@ -136,9 +136,11 @@ class ParentItem {
   });
 
   factory ParentItem.fromJson(Map<String, dynamic> json) {
-    var itemJsonList = json['items'] as List;
-    List<Item> itemList =
-        itemJsonList.map((item) => Item.fromJson(item)).toList();
+    List<Item> itemList = [];
+    if (json["items"] != null) {
+      var itemJsonList = json['items'] as List;
+      itemList = itemJsonList.map((item) => Item.fromJson(item)).toList();
+    }
 
     return ParentItem(
       id: json['ID'],
