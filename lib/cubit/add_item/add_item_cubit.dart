@@ -27,8 +27,7 @@ class AddItemCubit extends Cubit<AddItemStates> {
     }
   }
 
-
-   int updateQuantity = 1;
+  int updateQuantity = 1;
 
   void incrementupdateQuantity() {
     updateQuantity++;
@@ -41,8 +40,6 @@ class AddItemCubit extends Cubit<AddItemStates> {
       emit(DecrementQuantity());
     }
   }
-
-  
 
   void addParentItemToInventory({
     required String name,
@@ -57,6 +54,52 @@ class AddItemCubit extends Cubit<AddItemStates> {
     for (int i = 0; i < quantity; i++) {
       items.add(Item(isSold: false, name: name, price: price));
     }
+
+    final newParentItem = ParentItem(
+      branchId: branch.id,
+      name: name,
+      price: price,
+      items: items,
+    );
+    branch.parentItems.add(newParentItem);
+    DioHelper.postData(jwt: jwt, url: EndPoints.updateBranch, data: {
+      "ID": branch.id,
+      "name": branch.name,
+      "address": branch.address,
+      "lat_lng": {
+        "lat": branch.latLng.lat,
+        "lng": branch.latLng.lng,
+      },
+      "parent_items":
+          branch.parentItems.map((parentItem) => parentItem.toJson()).toList(),
+    }).then((value) {
+      showCustomSnackBar(
+        context,
+        value.data["message"],
+        value.data["message"] == "Branch Updated" ? Colors.green : Colors.red,
+      );
+      AppCubit.get(context).fetchBranches();
+      Navigator.pop(context);
+      emit(AddToInventorySuccessState());
+    });
+  }
+
+  void editParentItem({
+    required String name,
+    required double price,
+    required int quantity,
+    required BuildContext context,
+    required ParentItem item,
+    required Branch branch,
+  }) {
+    emit(AddToInventoryLoadingState());
+
+    List<Item> items = [];
+    for (int i = 0; i < quantity; i++) {
+      items.add(Item(isSold: false, name: name, price: price));
+    }
+
+    branch.parentItems.remove(item);
 
     final newParentItem = ParentItem(
       branchId: branch.id,

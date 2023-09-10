@@ -1,5 +1,4 @@
 // ignore_for_file: must_be_immutable
-
 import 'package:batrena/cubit/add_item/add_item_cubit.dart';
 import 'package:batrena/shared/colors.dart';
 import 'package:batrena/shared/components/components.dart';
@@ -11,6 +10,7 @@ import '../../models/branch_model.dart';
 class EditItem extends StatelessWidget {
   final ParentItem item;
   final Branch branch;
+
   EditItem({super.key, required this.item, required this.branch});
 
   var nameController = TextEditingController();
@@ -22,6 +22,7 @@ class EditItem extends StatelessWidget {
     var textTheme = Theme.of(context).textTheme;
     var cubit = AddItemCubit.get(context);
     var size = MediaQuery.of(context).size;
+
     nameController.text = item.name;
     priceController.text = item.price.toString();
     quantityController.text = item.items.length.toString();
@@ -178,6 +179,16 @@ class EditItem extends StatelessWidget {
                     //         : int.parse(quantityController.text),
                     //     context: context,
                     //     branch: branch);
+                    cubit.editParentItem(
+                      name: nameController.text,
+                      price: double.parse(priceController.text),
+                      quantity: quantityController.text.isEmpty
+                          ? cubit.updateQuantity
+                          : int.parse(quantityController.text),
+                      context: context,
+                      branch: branch,
+                      item: item,
+                    );
                   } else {
                     showCustomSnackBar(
                         context, "Required fields are empty !", Colors.red);
