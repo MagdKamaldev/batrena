@@ -13,19 +13,36 @@ class AddItemCubit extends Cubit<AddItemStates> {
 
   static AddItemCubit get(context) => BlocProvider.of(context);
 
-  int quantity = 1;
+  int addQuantity = 1;
 
-  void incrementQuantity() {
-    quantity++;
+  void incrementAddQuantity() {
+    addQuantity++;
     emit(IncrementQuantity());
   }
 
-  void decrementQuantity() {
-    if (quantity > 1) {
-      quantity--;
+  void decrementAddQuantity() {
+    if (addQuantity > 1) {
+      addQuantity--;
       emit(DecrementQuantity());
     }
   }
+
+
+   int updateQuantity = 1;
+
+  void incrementupdateQuantity() {
+    updateQuantity++;
+    emit(IncrementQuantity());
+  }
+
+  void decrementUpdateQuantity() {
+    if (updateQuantity > 1) {
+      updateQuantity--;
+      emit(DecrementQuantity());
+    }
+  }
+
+  
 
   void addParentItemToInventory({
     required String name,
@@ -48,7 +65,6 @@ class AddItemCubit extends Cubit<AddItemStates> {
       items: items,
     );
     branch.parentItems.add(newParentItem);
-    print(branch.parentItems.map((parentItem) => parentItem.toJson()).toList());
     DioHelper.postData(jwt: jwt, url: EndPoints.updateBranch, data: {
       "ID": branch.id,
       "name": branch.name,

@@ -13,3 +13,4 @@ class AddToInventoryLoadingState extends AddItemStates{}
 class AddToInventorySuccessState extends AddItemStates{}
 
 class AddToInventoryErrorState extends AddItemStates{}
+

@@ -1,15 +1,17 @@
 // ignore_for_file: must_be_immutable
-import 'package:batrena/models/branch_model.dart';
+
+import 'package:batrena/cubit/add_item/add_item_cubit.dart';
 import 'package:batrena/shared/colors.dart';
 import 'package:batrena/shared/components/components.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../cubit/add_item/add_item_cubit.dart';
+import '../../models/branch_model.dart';
 
-class AddItem extends StatelessWidget {
+class EditItem extends StatelessWidget {
+  final ParentItem item;
   final Branch branch;
-  AddItem({super.key, required this.branch});
+  EditItem({super.key, required this.item, required this.branch});
 
   var nameController = TextEditingController();
   var priceController = TextEditingController();
@@ -17,9 +19,13 @@ class AddItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var textTheme = Theme.of(context).textTheme;
     var cubit = AddItemCubit.get(context);
     var size = MediaQuery.of(context).size;
-    var textTheme = Theme.of(context).textTheme;
+    nameController.text = item.name;
+    priceController.text = item.price.toString();
+    quantityController.text = item.items.length.toString();
+    cubit.updateQuantity = item.items.length;
     return BlocConsumer<AddItemCubit, AddItemStates>(
       listener: (context, state) {},
       builder: (context, state) {
@@ -27,7 +33,7 @@ class AddItem extends StatelessWidget {
           appBar: AppBar(
             iconTheme: IconThemeData(color: lavendarBlush),
             title: Text(
-              "Add Item ",
+              "Edit ${item.name}",
               style: textTheme.bodyLarge,
             ),
           ),
@@ -36,7 +42,7 @@ class AddItem extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  "Please enter Item details",
+                  "Update Item details",
                   style: textTheme.bodyLarge!.copyWith(color: raisinBlack),
                 ),
                 SizedBox(
@@ -99,7 +105,7 @@ class AddItem extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               IconButton(
-                                onPressed: cubit.incrementAddQuantity,
+                                onPressed: cubit.incrementupdateQuantity,
                                 icon: Icon(
                                   Icons.add,
                                   color: celeste,
@@ -107,12 +113,12 @@ class AddItem extends StatelessWidget {
                               ),
                               const Spacer(),
                               Text(
-                                cubit.addQuantity.toString(),
+                                cubit.updateQuantity.toString(),
                                 style: textTheme.bodyLarge,
                               ),
                               const Spacer(),
                               IconButton(
-                                onPressed: cubit.decrementAddQuantity,
+                                onPressed: cubit.decrementUpdateQuantity,
                                 icon: Icon(
                                   Icons.remove,
                                   color: celeste,
@@ -145,6 +151,9 @@ class AddItem extends StatelessWidget {
                     ),
                   ],
                 ),
+                SizedBox(
+                  height: size.height * 0.1,
+                ),
               ],
             ),
           ),
@@ -161,21 +170,21 @@ class AddItem extends StatelessWidget {
                 onPressed: () {
                   if (nameController.text.isNotEmpty ||
                       priceController.text.isNotEmpty) {
-                    AddItemCubit.get(context).addParentItemToInventory(
-                        name: nameController.text,
-                        price: double.parse(priceController.text),
-                        quantity: quantityController.text.isEmpty
-                            ? AddItemCubit.get(context).addQuantity
-                            : int.parse(quantityController.text),
-                        context: context,
-                        branch: branch);
+                    // AddItemCubit.get(context).addParentItemToInventory(
+                    //     name: nameController.text,
+                    //     price: double.parse(priceController.text),
+                    //     quantity: quantityController.text.isEmpty
+                    //         ? AddItemCubit.get(context).updateQuantity
+                    //         : int.parse(quantityController.text),
+                    //     context: context,
+                    //     branch: branch);
                   } else {
                     showCustomSnackBar(
                         context, "Required fields are empty !", Colors.red);
                   }
                 },
                 child: Text(
-                  "Add to inventory",
+                  "Update",
                   style: textTheme.bodyLarge,
                 ),
               ),
