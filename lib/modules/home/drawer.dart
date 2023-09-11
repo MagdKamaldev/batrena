@@ -7,8 +7,7 @@ class AppDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   
-
+    var size = MediaQuery.of(context).size;
     return Drawer(
       child: Column(
         children: [
@@ -36,6 +35,36 @@ class AppDrawer extends StatelessWidget {
                     ),
                     const Icon(
                       Icons.map,
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: size.height * 0.02,
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => HeatMapScreen()));
+            },
+            child: Container(
+              height: 70,
+              child: Card(
+                elevation: 3,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text(
+                      "Change Shift",
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyLarge!
+                          .copyWith(color: raisinBlack),
+                    ),
+                    const Icon(
+                      Icons.change_circle_outlined,
                     )
                   ],
                 ),

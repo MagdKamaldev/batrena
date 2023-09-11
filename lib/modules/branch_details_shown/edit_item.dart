@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable
-import 'package:batrena/cubit/add_item/add_item_cubit.dart';
+
+import 'package:batrena/cubit/item/add_item_cubit.dart';
 import 'package:batrena/shared/colors.dart';
 import 'package:batrena/shared/components/components.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';

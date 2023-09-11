@@ -1,7 +1,8 @@
 import 'package:batrena/cubit/add_branch/add_branch_cubit.dart';
-import 'package:batrena/cubit/add_item/add_item_cubit.dart';
 import 'package:batrena/cubit/branch_view/branch_view_cubit.dart';
+import 'package:batrena/cubit/change_shift/change_shift_cubit.dart';
 import 'package:batrena/cubit/heat_map/heat_map_cubit.dart';
+import 'package:batrena/cubit/item/add_item_cubit.dart';
 import 'package:batrena/loadLib.dart';
 import 'package:batrena/modules/login/login_screen.dart';
 import 'package:batrena/shared/networks/local/cache_helper.dart';
@@ -53,6 +54,9 @@ class MyApp extends StatelessWidget {
         }),
         BlocProvider(create: (context) {
           return BranchViewCubit();
+        }),
+          BlocProvider(create: (context) {
+          return ChangeShiftCubit();
         }),
       ],
       child: BlocConsumer<AppCubit, AppStates>(

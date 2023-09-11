@@ -1,4 +1,3 @@
-import 'package:batrena/cubit/add_item/add_item_cubit.dart';
 import 'package:batrena/models/branch_model.dart';
 import 'package:batrena/modules/branch_details_shown/add_item.dart';
 import 'package:batrena/modules/branch_details_shown/edit_item.dart';
@@ -6,6 +5,7 @@ import 'package:batrena/shared/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import '../../cubit/item/add_item_cubit.dart';
 import '../../shared/components/components.dart';
 
 class BranchInventory extends StatelessWidget {

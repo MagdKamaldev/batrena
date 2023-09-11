@@ -29,9 +29,7 @@ class _HomeLayoutState extends State<HomeLayout> {
     var size = MediaQuery.of(context).size;
     var textTheme = Theme.of(context).textTheme;
     return BlocConsumer<AppCubit, AppStates>(
-      listener: (context, state) {
-        // print(jwt);
-      },
+      listener: (context, state) {},
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(

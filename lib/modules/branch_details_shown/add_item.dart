@@ -5,7 +5,7 @@ import 'package:batrena/shared/components/components.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../cubit/add_item/add_item_cubit.dart';
+import '../../cubit/item/add_item_cubit.dart';
 
 class AddItem extends StatelessWidget {
   final Branch branch;
