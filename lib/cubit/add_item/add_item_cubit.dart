@@ -25,7 +25,7 @@ class AddItemCubit extends Cubit<AddItemStates> {
 
   void incrementAddQuantity() {
     addQuantity++;
-     addQuantityController.text = addQuantity.toString();
+    addQuantityController.text = addQuantity.toString();
     emit(IncrementQuantity());
   }
 
@@ -172,7 +172,7 @@ class AddItemCubit extends Cubit<AddItemStates> {
         value.data["message"] == "Branch Updated" ? Colors.green : Colors.red,
       );
       AppCubit.get(context).fetchBranches();
-      Navigator.pop(context);
+
       emit(DeleteParentItemSuccessState());
     }).catchError((error) {
       emit(DeleteParentItemErrorState());
