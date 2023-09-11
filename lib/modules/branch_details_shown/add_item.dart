@@ -13,7 +13,6 @@ class AddItem extends StatelessWidget {
 
   var nameController = TextEditingController();
   var priceController = TextEditingController();
-  var quantityController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +84,7 @@ class AddItem extends StatelessWidget {
                 Row(
                   children: [
                     SizedBox(
-                      width: size.width * 0.4,
+                      width: size.width * 0.42,
                       height: size.height * 0.1,
                       child: Card(
                         elevation: 2.0,
@@ -108,7 +107,8 @@ class AddItem extends StatelessWidget {
                               const Spacer(),
                               Text(
                                 cubit.addQuantity.toString(),
-                                style: textTheme.bodyLarge,
+                                style: textTheme.bodyLarge!
+                                    .copyWith(fontSize: size.width * 0.042),
                               ),
                               const Spacer(),
                               IconButton(
@@ -134,9 +134,11 @@ class AddItem extends StatelessWidget {
                       width: size.width * 0.35,
                       height: size.height * 0.079,
                       child: defaultFormField(
-                        controller: quantityController,
+                        controller: cubit.addQuantityController,
                         type: TextInputType.number,
-                        onSubmit: () {},
+                        onSubmit: () {
+                          cubit.setAddIncDecSameAsController();
+                        },
                         validate: () {},
                         label: "Quantity",
                         prefix: Icons.numbers,
@@ -164,9 +166,9 @@ class AddItem extends StatelessWidget {
                     AddItemCubit.get(context).addParentItemToInventory(
                         name: nameController.text,
                         price: double.parse(priceController.text),
-                        quantity: quantityController.text.isEmpty
+                        quantity: cubit.addQuantityController.text.isEmpty
                             ? AddItemCubit.get(context).addQuantity
-                            : int.parse(quantityController.text),
+                            : int.parse(cubit.addQuantityController.text),
                         context: context,
                         branch: branch);
                   } else {

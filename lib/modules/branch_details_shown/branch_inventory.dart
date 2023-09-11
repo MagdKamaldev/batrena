@@ -66,10 +66,15 @@ class BranchInventory extends StatelessWidget {
       key: ValueKey(item.id),
       endActionPane: ActionPane(
         motion: const ScrollMotion(),
-        dismissible: DismissiblePane(onDismissed: () {}),
+        dismissible: DismissiblePane(onDismissed: () {
+          cubit.deleteParentItem(context: context, item: item, branch: branch);
+        }),
         children: [
           SlidableAction(
-            onPressed: (context) {},
+            onPressed: (context) {
+              cubit.deleteParentItem(
+                  context: context, item: item, branch: branch);
+            },
             spacing: 15,
             backgroundColor: lavendarBlush,
             foregroundColor: Colors.red,
@@ -79,7 +84,12 @@ class BranchInventory extends StatelessWidget {
           SlidableAction(
             spacing: 15,
             onPressed: (context) {
-              navigateTo(context, EditItem(item: item,branch: branch,));
+              navigateTo(
+                  context,
+                  EditItem(
+                    item: item,
+                    branch: branch,
+                  ));
             },
             backgroundColor: lavendarBlush,
             foregroundColor: carrebianCurrent,

@@ -13,16 +13,26 @@ class AddItemCubit extends Cubit<AddItemStates> {
 
   static AddItemCubit get(context) => BlocProvider.of(context);
 
+  var addQuantityController = TextEditingController();
+
+  void setAddIncDecSameAsController() {
+    addQuantity = int.parse(addQuantityController.text);
+    emit(SetAddIncDecSameAsController());
+  }
+
   int addQuantity = 1;
+  var quantityController = TextEditingController();
 
   void incrementAddQuantity() {
     addQuantity++;
+     addQuantityController.text = addQuantity.toString();
     emit(IncrementQuantity());
   }
 
   void decrementAddQuantity() {
     if (addQuantity > 1) {
       addQuantity--;
+      addQuantityController.text = addQuantity.toString();
       emit(DecrementQuantity());
     }
   }
@@ -31,14 +41,21 @@ class AddItemCubit extends Cubit<AddItemStates> {
 
   void incrementupdateQuantity() {
     updateQuantity++;
+    quantityController.text = updateQuantity.toString();
     emit(IncrementQuantity());
   }
 
   void decrementUpdateQuantity() {
     if (updateQuantity > 1) {
       updateQuantity--;
+      quantityController.text = updateQuantity.toString();
       emit(DecrementQuantity());
     }
+  }
+
+  void setIncDecSameAsController() {
+    updateQuantity = int.parse(quantityController.text);
+    emit(SetIncDecSameAsController());
   }
 
   void addParentItemToInventory({
@@ -127,6 +144,38 @@ class AddItemCubit extends Cubit<AddItemStates> {
       AppCubit.get(context).fetchBranches();
       Navigator.pop(context);
       emit(AddToInventorySuccessState());
+    });
+  }
+
+  void deleteParentItem({
+    required BuildContext context,
+    required ParentItem item,
+    required Branch branch,
+  }) {
+    emit(DeleteParentItemLoadingState());
+    branch.parentItems.remove(item);
+    emit(DeleteParentItemLocalSuccessState());
+    DioHelper.postData(jwt: jwt, url: EndPoints.updateBranch, data: {
+      "ID": branch.id,
+      "name": branch.name,
+      "address": branch.address,
+      "lat_lng": {
+        "lat": branch.latLng.lat,
+        "lng": branch.latLng.lng,
+      },
+      "parent_items":
+          branch.parentItems.map((parentItem) => parentItem.toJson()).toList(),
+    }).then((value) {
+      showCustomSnackBar(
+        context,
+        "Item Deleted",
+        value.data["message"] == "Branch Updated" ? Colors.green : Colors.red,
+      );
+      AppCubit.get(context).fetchBranches();
+      Navigator.pop(context);
+      emit(DeleteParentItemSuccessState());
+    }).catchError((error) {
+      emit(DeleteParentItemErrorState());
     });
   }
 }

@@ -7,15 +7,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../models/branch_model.dart';
 
-class EditItem extends StatelessWidget {
+class EditItem extends StatefulWidget {
   final ParentItem item;
   final Branch branch;
 
-  EditItem({super.key, required this.item, required this.branch});
+  const EditItem({super.key, required this.item, required this.branch});
 
+  @override
+  State<EditItem> createState() => _EditItemState();
+}
+
+class _EditItemState extends State<EditItem> {
   var nameController = TextEditingController();
+
   var priceController = TextEditingController();
-  var quantityController = TextEditingController();
+
+  @override
+  void initState() {
+    var cubit = AddItemCubit.get(context);
+    nameController.text = widget.item.name;
+    priceController.text = widget.item.price.toString();
+    cubit.quantityController.text = widget.item.items.length.toString();
+    cubit.updateQuantity = widget.item.items.length;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +38,6 @@ class EditItem extends StatelessWidget {
     var cubit = AddItemCubit.get(context);
     var size = MediaQuery.of(context).size;
 
-    nameController.text = item.name;
-    priceController.text = item.price.toString();
-    quantityController.text = item.items.length.toString();
-    cubit.updateQuantity = item.items.length;
     return BlocConsumer<AddItemCubit, AddItemStates>(
       listener: (context, state) {},
       builder: (context, state) {
@@ -34,7 +45,7 @@ class EditItem extends StatelessWidget {
           appBar: AppBar(
             iconTheme: IconThemeData(color: lavendarBlush),
             title: Text(
-              "Edit ${item.name}",
+              "Edit ${widget.item.name}",
               style: textTheme.bodyLarge,
             ),
           ),
@@ -92,7 +103,7 @@ class EditItem extends StatelessWidget {
                 Row(
                   children: [
                     SizedBox(
-                      width: size.width * 0.4,
+                      width: size.width * 0.42,
                       height: size.height * 0.1,
                       child: Card(
                         elevation: 2.0,
@@ -115,7 +126,8 @@ class EditItem extends StatelessWidget {
                               const Spacer(),
                               Text(
                                 cubit.updateQuantity.toString(),
-                                style: textTheme.bodyLarge,
+                                style: textTheme.bodyLarge!
+                                    .copyWith(fontSize: size.width * 0.042),
                               ),
                               const Spacer(),
                               IconButton(
@@ -141,9 +153,11 @@ class EditItem extends StatelessWidget {
                       width: size.width * 0.35,
                       height: size.height * 0.079,
                       child: defaultFormField(
-                        controller: quantityController,
+                        controller: cubit.quantityController,
                         type: TextInputType.number,
-                        onSubmit: () {},
+                        onSubmit: () {
+                          cubit.setIncDecSameAsController();
+                        },
                         validate: () {},
                         label: "Quantity",
                         prefix: Icons.numbers,
@@ -171,23 +185,15 @@ class EditItem extends StatelessWidget {
                 onPressed: () {
                   if (nameController.text.isNotEmpty ||
                       priceController.text.isNotEmpty) {
-                    // AddItemCubit.get(context).addParentItemToInventory(
-                    //     name: nameController.text,
-                    //     price: double.parse(priceController.text),
-                    //     quantity: quantityController.text.isEmpty
-                    //         ? AddItemCubit.get(context).updateQuantity
-                    //         : int.parse(quantityController.text),
-                    //     context: context,
-                    //     branch: branch);
                     cubit.editParentItem(
                       name: nameController.text,
                       price: double.parse(priceController.text),
-                      quantity: quantityController.text.isEmpty
+                      quantity: cubit.quantityController.text.isEmpty
                           ? cubit.updateQuantity
-                          : int.parse(quantityController.text),
+                          : int.parse(cubit.quantityController.text),
                       context: context,
-                      branch: branch,
-                      item: item,
+                      branch: widget.branch,
+                      item: widget.item,
                     );
                   } else {
                     showCustomSnackBar(
