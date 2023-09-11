@@ -172,7 +172,6 @@ class AddItemCubit extends Cubit<AddItemStates> {
         value.data["message"] == "Branch Updated" ? Colors.green : Colors.red,
       );
       AppCubit.get(context).fetchBranches();
-
       emit(DeleteParentItemSuccessState());
     }).catchError((error) {
       emit(DeleteParentItemErrorState());
