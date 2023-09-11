@@ -29,7 +29,6 @@ class AppCubit extends Cubit<AppStates> {
 
       emit(FetchBranchesSuccessState());
     }).catchError((error) {
-      print(error.toString());
       emit(FetchBranchesErrorState());
     });
   }

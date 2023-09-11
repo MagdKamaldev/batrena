@@ -1,6 +1,7 @@
 import 'package:batrena/cubit/branch_view/branch_view_cubit.dart';
 import 'package:batrena/models/branch_model.dart';
 import 'package:batrena/modules/branch_screens/cart_screen.dart';
+import 'package:batrena/modules/change_shift/change_shift_screen.dart';
 import 'package:batrena/shared/colors.dart';
 import 'package:batrena/shared/components/components.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,8 @@ class BranchHomeScreen extends StatelessWidget {
     var size = MediaQuery.of(context).size;
     bool isMobile = size.width <= 600;
     double heightRatio = isMobile ? 1.2 : 1.05;
+    bool isPc = size.width > 600;
+
     return FutureBuilder(
         future: cubit.loadData,
         builder: (context, snapshot) {
@@ -47,6 +50,29 @@ class BranchHomeScreen extends StatelessWidget {
                                     ),
                                   ),
                                 ),
+                                SizedBox(
+                                  height: size.height * 0.03,
+                                ),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    navigateTo(
+                                        context,
+                                        ChangeShiftScreen(
+                                          branch: cubit.branch,
+                                        ));
+                                  },
+                                  child: SizedBox(
+                                    height: 40,
+                                    width: double.infinity,
+                                    child: Center(
+                                      child: Text(
+                                        "Change Shift",
+                                        style: textTheme.bodyLarge!
+                                            .copyWith(color: carrebianCurrent),
+                                      ),
+                                    ),
+                                  ),
+                                ),
                               ],
                             ),
                           )
@@ -54,8 +80,10 @@ class BranchHomeScreen extends StatelessWidget {
                     appBar: AppBar(
                       iconTheme: IconThemeData(color: lavendarBlush),
                       title: Text(
-                        "${cubit.branch.name} inventory",
-                        style: textTheme.bodyLarge,
+                        "${cubit.branch.name} (${cubit.branch.currentShift.employee.name})",
+                        style: textTheme.bodyLarge!.copyWith(
+                            fontSize:
+                                isPc ? size.width * 0.03 : size.width * 0.05),
                       ),
                     ),
                     floatingActionButton: FloatingActionButton(
@@ -112,7 +140,6 @@ class BranchHomeScreen extends StatelessWidget {
     var cubit = BranchViewCubit.get(context);
     var size = MediaQuery.of(context).size;
     bool isMobile = size.width <= 500;
-    print(size.width);
 
     return Container(
       decoration: BoxDecoration(
@@ -121,13 +148,6 @@ class BranchHomeScreen extends StatelessWidget {
       ),
       child: Stack(
         children: [
-          // ClipRRect(
-          //   borderRadius: BorderRadius.circular(10),
-          //   child: Image.asset(
-          //     "assets/images/pepsi.jpg",
-          //     fit: BoxFit.cover,
-          //   ),
-          // ),
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,

@@ -25,9 +25,9 @@ class LoginCubit extends Cubit<LoginStates> {
     }).then((value) {
       jwt = value.data["jwt"];
       permission = value.data["permission"];
+      print(jwt);
       emit(LoginSuccessState());
     }).catchError((error) {
-      print(error.toString());
       emit(LoginErrorState());
     });
   }

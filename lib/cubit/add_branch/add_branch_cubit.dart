@@ -46,7 +46,6 @@ class AddBranchCubit extends Cubit<AddBranchState> {
     currentLatLong = await Geolocator.getCurrentPosition().then(
       (value) => value,
     );
-    //print(currentLatLong!.latitude);
     emit(GetLatLongSuccessState());
 
     myPosition = CameraPosition(

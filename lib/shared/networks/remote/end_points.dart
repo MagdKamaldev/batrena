@@ -6,4 +6,6 @@ class EndPoints {
   static String registerTransaction = "protected/RegisterTransaction";
   static String registerBranch = "protected/RegisterBranch";
   static String updateBranch = "protected/UpdateBranch";
+  static String switchShift = "protected/SwitchShift";
+  
 }

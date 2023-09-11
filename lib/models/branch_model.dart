@@ -173,6 +173,8 @@ class Branch {
   HeatMap heatMap;
   int totalSold;
   int soldToday;
+  List<Shift> shifts;
+  Shift currentShift;
   Branch({
     required this.id,
     required this.createdAt,
@@ -186,15 +188,20 @@ class Branch {
     required this.heatMap,
     required this.totalSold,
     required this.soldToday,
+    required this.shifts,
+    required this.currentShift,
   });
 
   factory Branch.fromJson(Map<String, dynamic> json) {
-    print("parentItemList");
     var parentItemJsonList = json['parent_items'] as List;
     List<ParentItem> parentItemList = parentItemJsonList
         .map((parentItem) => ParentItem.fromJson(parentItem))
         .toList();
-    print(parentItemJsonList);
+
+    var shiftJsonList = json['shifts'] as List;
+    List<Shift> shiftList =
+        shiftJsonList.map((shift) => Shift.fromJson(shift)).toList();
+
     return Branch(
       id: json['ID'],
       createdAt: json['CreatedAt'],
@@ -208,6 +215,8 @@ class Branch {
       heatMap: HeatMap.fromJson(json['heat_map']),
       totalSold: json['total_sold'],
       soldToday: json['sold_today'],
+      shifts: shiftList,
+      currentShift: Shift.fromJson(json['current_shift']),
     );
   }
 
@@ -223,6 +232,110 @@ class Branch {
       'parent_items': parentItems.map((item) => item.toJson()).toList(),
       'transactions': transactions,
       'heat_map': heatMap.toJson(),
+      'total_sold': totalSold,
+      'sold_today': soldToday,
+      'shifts': shifts.map((shift) => shift.toJson()).toList(),
+      'current_shift': currentShift.toJson(),
+    };
+  }
+}
+
+class Shift {
+  int id;
+  String createdAt;
+  String updatedAt;
+  dynamic deletedAt;
+  int branchId;
+  String startedAt;
+  String closedAt;
+  int employeeId;
+  Employee employee;
+  bool isClosed;
+
+  Shift({
+    required this.id,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.deletedAt,
+    required this.branchId,
+    required this.startedAt,
+    required this.closedAt,
+    required this.employeeId,
+    required this.employee,
+    required this.isClosed,
+  });
+
+  factory Shift.fromJson(Map<String, dynamic> json) {
+    return Shift(
+      id: json['ID'],
+      createdAt: json['CreatedAt'],
+      updatedAt: json['UpdatedAt'],
+      deletedAt: json['DeletedAt'],
+      branchId: json['branch_id'],
+      startedAt: json['started_at'],
+      closedAt: json['closed_at'],
+      employeeId: json['employee_id'],
+      employee: Employee.fromJson(json['employee']),
+      isClosed: json['is_closed'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'ID': id,
+      'CreatedAt': createdAt,
+      'UpdatedAt': updatedAt,
+      'DeletedAt': deletedAt,
+      'branch_id': branchId,
+      'started_at': startedAt,
+      'closed_at': closedAt,
+      'employee_id': employeeId,
+      'employee': employee.toJson(),
+      'is_closed': isClosed,
+    };
+  }
+}
+
+class Employee {
+  int id;
+  String createdAt;
+  String updatedAt;
+  dynamic deletedAt;
+  String name;
+  String password;
+  String currentOtp;
+
+  Employee({
+    required this.id,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.deletedAt,
+    required this.name,
+    required this.password,
+    required this.currentOtp,
+  });
+
+  factory Employee.fromJson(Map<String, dynamic> json) {
+    return Employee(
+      id: json['ID'],
+      createdAt: json['CreatedAt'],
+      updatedAt: json['UpdatedAt'],
+      deletedAt: json['DeletedAt'],
+      name: json['name'],
+      password: json['password'],
+      currentOtp: json['current_otp'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'ID': id,
+      'CreatedAt': createdAt,
+      'UpdatedAt': updatedAt,
+      'DeletedAt': deletedAt,
+      'name': name,
+      'password': password,
+      'current_otp': currentOtp,
     };
   }
 }

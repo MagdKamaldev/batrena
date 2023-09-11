@@ -1,5 +1,6 @@
 import 'package:batrena/modules/heat_map/heat_map_screen.dart';
 import 'package:batrena/shared/colors.dart';
+import 'package:batrena/shared/components/components.dart';
 import 'package:flutter/material.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -7,7 +8,7 @@ class AppDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
+    //var size = MediaQuery.of(context).size;
     return Drawer(
       child: Column(
         children: [
@@ -16,10 +17,9 @@ class AppDrawer extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => HeatMapScreen()));
+              navigateTo(context, HeatMapScreen());
             },
-            child: Container(
+            child: SizedBox(
               height: 70,
               child: Card(
                 elevation: 3,
@@ -41,36 +41,35 @@ class AppDrawer extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
-            height: size.height * 0.02,
-          ),
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => HeatMapScreen()));
-            },
-            child: Container(
-              height: 70,
-              child: Card(
-                elevation: 3,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Text(
-                      "Change Shift",
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyLarge!
-                          .copyWith(color: raisinBlack),
-                    ),
-                    const Icon(
-                      Icons.change_circle_outlined,
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ),
+          // SizedBox(
+          //   height: size.height * 0.02,
+          // ),
+          // GestureDetector(
+          //   onTap: () {
+          //     navigateTo(context, const ChangeShiftScreen());
+          //   },
+          //   child: SizedBox(
+          //     height: 70,
+          //     child: Card(
+          //       elevation: 3,
+          //       child: Row(
+          //         mainAxisAlignment: MainAxisAlignment.spaceAround,
+          //         children: [
+          //           Text(
+          //             "Change Shift",
+          //             style: Theme.of(context)
+          //                 .textTheme
+          //                 .bodyLarge!
+          //                 .copyWith(color: raisinBlack),
+          //           ),
+          //           const Icon(
+          //             Icons.change_circle_outlined,
+          //           )
+          //         ],
+          //       ),
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );
