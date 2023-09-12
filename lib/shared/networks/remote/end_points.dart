@@ -7,5 +7,5 @@ class EndPoints {
   static String registerBranch = "protected/RegisterBranch";
   static String updateBranch = "protected/UpdateBranch";
   static String switchShift = "protected/SwitchShift";
-  
+  static String transactionExcel = " protected/GetBranchTransactionsExcel";
 }

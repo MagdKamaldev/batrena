@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 import 'package:batrena/models/branch_model.dart' as branch_model;
 import 'package:batrena/modules/branch_details_shown/branch_inventory.dart';
+import 'package:batrena/modules/branch_details_shown/branch_transaction.dart';
 import 'package:batrena/shared/colors.dart';
 import 'package:batrena/shared/components/components.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +41,7 @@ class BranchDetailsShown extends StatelessWidget {
           future: loadMarkers,
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
-              return CircularProgressIndicator();
+              return const CircularProgressIndicator();
             } else {
               return SingleChildScrollView(
                 child: Column(
@@ -203,11 +204,11 @@ class BranchDetailsShown extends StatelessWidget {
                               child: MaterialButton(
                                 color: carrebianCurrent,
                                 onPressed: () {
-                                  // navigateTo(
-                                  //     context,
-                                  //     BranchInventory(
-                                  //       branch: branch,
-                                  //     ));
+                                  navigateTo(
+                                      context,
+                                      BranchTransactions(
+                                        branch: branch,
+                                      ));
                                 },
                                 child: Row(
                                   children: [
