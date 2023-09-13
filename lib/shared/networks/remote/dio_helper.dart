@@ -29,6 +29,24 @@ class DioHelper {
     );
   }
 
+  static Future<Response> postDataBytes({
+    required String url,
+    Map<String, dynamic>? query,
+    required Map<String, dynamic> data,
+    String? jwt,
+  }) async {
+    dio!.options.headers = {
+      "Authorization": "Bearer $jwt",
+      "Content-Type": "application/json",
+    };
+    dio!.options.responseType = ResponseType.bytes;
+    return dio!.post(
+      url,
+      queryParameters: query,
+      data: data,
+    );
+  }
+
   static Future<Response> postData({
     required String url,
     Map<String, dynamic>? query,

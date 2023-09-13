@@ -73,6 +73,25 @@ class BranchHomeScreen extends StatelessWidget {
                                     ),
                                   ),
                                 ),
+                                SizedBox(
+                                  height: size.height * 0.03,
+                                ),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    logout(context: context);
+                                  },
+                                  child: SizedBox(
+                                    height: 40,
+                                    width: double.infinity,
+                                    child: Center(
+                                      child: Text(
+                                        "Logout",
+                                        style: textTheme.bodyLarge!
+                                            .copyWith(color: carrebianCurrent),
+                                      ),
+                                    ),
+                                  ),
+                                ),
                               ],
                             ),
                           )
@@ -88,7 +107,7 @@ class BranchHomeScreen extends StatelessWidget {
                     ),
                     floatingActionButton: FloatingActionButton(
                       onPressed: () {
-                        navigateTo(context, CartScreen());
+                        navigateTo(context, const CartScreen());
                       },
                       backgroundColor: carrebianCurrent,
                       child: Icon(
@@ -100,26 +119,125 @@ class BranchHomeScreen extends StatelessWidget {
                       scrollDirection: Axis.vertical,
                       child: Padding(
                         padding: const EdgeInsets.all(15.0),
-                        child: GridView.count(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          crossAxisCount: isMobile ? 2 : 6,
-                          mainAxisSpacing: isMobile ? 16 : 20,
-                          crossAxisSpacing: isMobile ? 16 : 20,
-                          childAspectRatio: 1 / heightRatio,
-                          children: List.generate(
-                            cubit.branch.parentItems.length,
-                            (index) => Padding(
-                              padding: isMobile
-                                  ? const EdgeInsets.only(
-                                      top: 12,
-                                    )
-                                  : EdgeInsets.zero,
-                              child: buildBranchItem(
-                                  context: context,
-                                  item: cubit.branch.parentItems[index]),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            if (!isMobile)
+                              SizedBox(
+                                height: size.height,
+                                width: size.width * 0.2,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        navigateTo(context, const CartScreen());
+                                      },
+                                      child: SizedBox(
+                                        height: 40,
+                                        width: double.infinity,
+                                        child: Center(
+                                          child: Text(
+                                            "Cart",
+                                            style:
+                                                textTheme.bodyLarge!.copyWith(
+                                              color: carrebianCurrent,
+                                              fontSize: 20,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: size.height * 0.03,
+                                    ),
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        navigateTo(
+                                            context,
+                                            ChangeShiftScreen(
+                                              branch: cubit.branch,
+                                            ));
+                                      },
+                                      child: SizedBox(
+                                        height: 40,
+                                        width: double.infinity,
+                                        child: Center(
+                                          child: Text(
+                                            "Change Shift",
+                                            overflow: TextOverflow.ellipsis,
+                                            style:
+                                                textTheme.bodyLarge!.copyWith(
+                                              color: carrebianCurrent,
+                                              fontSize: 20,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: size.height * 0.03,
+                                    ),
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        logout(context: context);
+                                      },
+                                      child: SizedBox(
+                                        height: 40,
+                                        width: double.infinity,
+                                        child: Center(
+                                          child: Text(
+                                            "Logout",
+                                            style:
+                                                textTheme.bodyLarge!.copyWith(
+                                              color: carrebianCurrent,
+                                              fontSize: 20,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            if (!isMobile)
+                              SizedBox(
+                                width: size.width * 0.03,
+                              ),
+                            if (!isMobile)
+                              Container(
+                                height: size.height * 0.9,
+                                width: 1,
+                                color: carrebianCurrent,
+                              ),
+                            if (!isMobile)
+                              SizedBox(
+                                width: size.width * 0.03,
+                              ),
+                            Expanded(
+                              child: GridView.count(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                crossAxisCount: isMobile ? 2 : 6,
+                                mainAxisSpacing: isMobile ? 16 : 20,
+                                crossAxisSpacing: isMobile ? 16 : 20,
+                                childAspectRatio: 1 / heightRatio,
+                                children: List.generate(
+                                  cubit.branch.parentItems.length,
+                                  (index) => Padding(
+                                    padding: isMobile
+                                        ? const EdgeInsets.only(
+                                            top: 12,
+                                          )
+                                        : EdgeInsets.zero,
+                                    child: buildBranchItem(
+                                        context: context,
+                                        item: cubit.branch.parentItems[index]),
+                                  ),
+                                ),
+                              ),
                             ),
-                          ),
+                          ],
                         ),
                       ),
                     ),
@@ -154,12 +272,12 @@ class BranchHomeScreen extends StatelessWidget {
             children: [
               if (!isMobile)
                 SizedBox(
-                  height: size.height * 0.01,
+                  height: size.height * 0.002,
                 ),
               Column(
                 children: [
                   SizedBox(
-                    height: size.height * 0.02,
+                    height: size.height * 0.006,
                   ),
                   Text(
                     item.name,
@@ -202,43 +320,42 @@ class BranchHomeScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              const Spacer(),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10.0),
-                child: SizedBox(
-                  child: TextButton(
-                      onPressed: () {
-                        cubit.addTocart(
-                            item: item.items.first,
-                            parent: item,
-                            context: context);
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Add Item",
-                            style: textTheme.titleMedium!.copyWith(
-                              fontSize: isMobile
-                                  ? size.width * 0.06
-                                  : size.width * 0.015,
-                              color: lavendarBlush,
-                            ),
+              SizedBox(
+                height: isMobile ? size.height * 0.03 : size.height * 0.01,
+              ),
+              SizedBox(
+                child: TextButton(
+                    onPressed: () {
+                      cubit.addTocart(
+                          item: item.items.first,
+                          parent: item,
+                          context: context);
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Add Item",
+                          style: textTheme.titleMedium!.copyWith(
+                            fontSize: isMobile
+                                ? size.width * 0.06
+                                : size.width * 0.013,
+                            color: lavendarBlush,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 5.0),
-                            child: Icon(
-                              Icons.add_circle_rounded,
-                              color: lavendarBlush,
-                              size: isMobile
-                                  ? size.width * 0.06
-                                  : size.width * 0.023,
-                            ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 5.0),
+                          child: Icon(
+                            Icons.add_circle_rounded,
+                            color: lavendarBlush,
+                            size: isMobile
+                                ? size.width * 0.06
+                                : size.width * 0.023,
                           ),
-                        ],
-                      )),
-                ),
+                        ),
+                      ],
+                    )),
               )
             ],
           ),

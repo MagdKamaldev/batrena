@@ -8,12 +8,12 @@ class AppDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //var size = MediaQuery.of(context).size;
+    var size = MediaQuery.of(context).size;
     return Drawer(
       child: Column(
         children: [
-          const SizedBox(
-            height: 70,
+          SizedBox(
+            height: size.height * 0.08,
           ),
           GestureDetector(
             onTap: () {
@@ -35,6 +35,35 @@ class AppDrawer extends StatelessWidget {
                     ),
                     const Icon(
                       Icons.map,
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: size.height * 0.08,
+          ),
+          GestureDetector(
+            onTap: () {
+              logout(context: context);
+            },
+            child: SizedBox(
+              height: 70,
+              child: Card(
+                elevation: 3,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text(
+                      "Logout",
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyLarge!
+                          .copyWith(color: raisinBlack),
+                    ),
+                    const Icon(
+                      Icons.logout,
                     )
                   ],
                 ),

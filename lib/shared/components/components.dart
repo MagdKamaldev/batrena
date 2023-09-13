@@ -1,3 +1,5 @@
+import 'package:batrena/main.dart';
+import 'package:batrena/modules/login/login_screen.dart';
 import 'package:batrena/shared/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -64,6 +66,14 @@ Widget defaultFormField({
       const SizedBox(height: 5),
     ],
   );
+}
+
+void logout({
+  required BuildContext context,
+}) {
+  navigateAndFinish(context, LoginScreen());
+  jwt = "";
+  permission = 0;
 }
 
 void showCustomSnackBar(

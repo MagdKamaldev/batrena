@@ -242,6 +242,64 @@ class Branch {
   }
 }
 
+class Transaction {
+  int id;
+  String createdAt;
+  String updatedAt;
+  dynamic deletedAt;
+  int branchId;
+  List<Item> items;
+  List<Item> itemsStruct; // Add this field
+  int totalCost; // Add this field
+
+  Transaction({
+    required this.id,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.deletedAt,
+    required this.branchId,
+    required this.items,
+    required this.itemsStruct,
+    required this.totalCost,
+  });
+
+  factory Transaction.fromJson(Map<String, dynamic> json) {
+    List<Item> itemList = [];
+    if (json["items"] != null) {
+      var itemJsonList = json['items'] as List;
+      itemList = itemJsonList.map((item) => Item.fromJson(item)).toList();
+    }
+
+    return Transaction(
+      id: json['ID'],
+      createdAt: json['CreatedAt'],
+      updatedAt: json['UpdatedAt'],
+      deletedAt: json['DeletedAt'],
+      branchId: json['branch_id'],
+      items: itemList,
+      itemsStruct: json['ItemsStruct']
+          .map((e) => Item.fromJson(e))
+          .toList(), // Update to include ItemsStruct
+      totalCost: json['total_cost'], // Update to include total_cost
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'ID': id,
+      'CreatedAt': createdAt,
+      'UpdatedAt': updatedAt,
+      'DeletedAt': deletedAt,
+      'branch_id': branchId,
+      'items': items.map((item) => item.toJson()).toList(),
+      'ItemsStruct': itemsStruct
+          .map((e) => e.toJson())
+          .toList(), // Include ItemsStruct in JSON output
+      'total_cost': totalCost, // Include total_cost in JSON output
+    };
+  }
+}
+
 class Shift {
   int id;
   String createdAt;

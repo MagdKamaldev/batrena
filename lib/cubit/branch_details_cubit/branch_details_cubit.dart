@@ -1,4 +1,3 @@
-import 'dart:typed_data';
 import 'package:batrena/main.dart';
 import 'package:batrena/models/branch_model.dart';
 import 'package:batrena/shared/networks/remote/dio_helper.dart';
@@ -13,28 +12,23 @@ class BranchDetailsCubit extends Cubit<BranchDetailsState> {
 
   void generateExcellSheet({required int branchId, required Branch branch}) {
     emit(GetExcellLoadingState());
-    DioHelper.postData(
+    DioHelper.postDataBytes(
       url: "protected/GetBranchTransactionsExcel",
       jwt: jwt,
       data: {"branch_id": branchId},
     ).then((value) async {
       try {
-        String excelData = value.data;
-        if (excelData.isNotEmpty) {
-          Uint8List bytes = Uint8List.fromList(excelData.codeUnits);
-          String path = await FileSaver.instance.saveFile(
-            name: branch.name == "" ? "File" : "${branch.name}_Transactions",
-            bytes: bytes,
-            ext: 'xlsx',
-            mimeType: MimeType.microsoftExcel,
-          );
-          openExcelSheet(path);
+    
+        // Uint8List bytes = Uint8List.fromList(excelData.codeUnits);
+        String path = await FileSaver.instance.saveFile(
+          name: branch.name == "" ? "File" : "${branch.name}_Transactions",
+          bytes: value.data,
+          ext: 'xlsx',
+          mimeType: MimeType.microsoftExcel,
+        );
+        openExcelSheet(path);
 
-          emit(GetExcellSucceededState());
-        } else {
-          print('Received empty Excel data.');
-          emit(GetExcellErrorState());
-        }
+        emit(GetExcellSucceededState());
       } catch (error) {
         print('Error converting data: $error');
         emit(GetExcellErrorState());

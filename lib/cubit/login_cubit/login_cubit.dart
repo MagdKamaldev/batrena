@@ -1,4 +1,5 @@
 import 'package:batrena/main.dart';
+import 'package:batrena/shared/networks/local/cache_helper.dart';
 import 'package:batrena/shared/networks/remote/dio_helper.dart';
 import 'package:batrena/shared/networks/remote/end_points.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,7 +26,8 @@ class LoginCubit extends Cubit<LoginStates> {
     }).then((value) {
       jwt = value.data["jwt"];
       permission = value.data["permission"];
-      print(jwt);
+      CacheHelper.saveData(key: "permission", value: permission);
+      CacheHelper.saveData(key: "jwt", value: jwt);
       emit(LoginSuccessState());
     }).catchError((error) {
       emit(LoginErrorState());

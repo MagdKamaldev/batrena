@@ -5,6 +5,8 @@ import 'package:batrena/cubit/change_shift/change_shift_cubit.dart';
 import 'package:batrena/cubit/heat_map/heat_map_cubit.dart';
 import 'package:batrena/cubit/item/add_item_cubit.dart';
 import 'package:batrena/loadLib.dart';
+import 'package:batrena/modules/branch_screens/branch_home_screen.dart';
+import 'package:batrena/modules/home/home_layout.dart';
 import 'package:batrena/modules/login/login_screen.dart';
 import 'package:batrena/shared/networks/local/cache_helper.dart';
 import 'package:batrena/shared/networks/remote/dio_helper.dart';
@@ -26,13 +28,18 @@ void main() async {
   lib = loadLibForFlutter("libImagePixelReplacer.so", "ImagePixelReplacer.dll");
   // lib = DynamicLibrary.process();
   impl = ImagePixelReplacerImpl(lib);
-  DioHelper.init();
   await CacheHelper.init();
+  jwt = await CacheHelper.getData(key: "jwt");
+  permission = await CacheHelper.getData(key: "permission");
+  DioHelper.init();
+
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +77,11 @@ class MyApp extends StatelessWidget {
             title: 'Flutter Demo',
             debugShowCheckedModeBanner: false,
             theme: lightTheme,
-            home: LoginScreen(),
+            home: jwt == null || permission == 0
+                ? LoginScreen()
+                : permission == 1
+                    ? const BranchHomeScreen()
+                    : const HomeLayout(),
           );
         },
       ),

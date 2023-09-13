@@ -27,7 +27,7 @@ class LoginScreen extends StatelessWidget {
           if (permission == 2) {
             navigateAndFinish(context, const HomeLayout());
           } else if (permission == 1) {
-            navigateAndFinish(context, BranchHomeScreen());
+            navigateAndFinish(context, const BranchHomeScreen());
           }
         }
       },
