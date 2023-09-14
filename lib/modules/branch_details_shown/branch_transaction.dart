@@ -1,5 +1,7 @@
 import 'package:batrena/cubit/branch_details_cubit/branch_details_cubit.dart';
+import 'package:batrena/modules/branch_details_shown/transaction_details.dart';
 import 'package:batrena/shared/colors.dart';
+import 'package:batrena/shared/components/components.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -62,43 +64,52 @@ class BranchTransactions extends StatelessWidget {
     String dateString = item.createdAt;
     String formattedDate =
         DateFormat('dd-MM-yyyy / HH:mm').format(DateTime.parse(dateString));
-    return SizedBox(
-      width: double.infinity,
-      height: size.height * 0.13,
-      child: Card(
-        elevation: 2,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 7),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Total Cost :   ",
-                    style: theme.bodyLarge!.copyWith(
-                        fontSize:
-                            isMobile ? size.width * 0.05 : size.width * 0.02,
-                        color: Colors.grey[700]),
-                  ),
-                  Text(
-                    "${item.totalCost.toString()} EGP",
-                    style: theme.bodyLarge!.copyWith(
-                        fontSize:
-                            isMobile ? size.width * 0.05 : size.width * 0.02,
-                        color: raisinBlack),
-                  ),
-                ],
-              ),
-              Align(
-                alignment: Alignment.bottomRight,
-                child: Text(
-                  formattedDate,
-                  style: theme.titleSmall!.copyWith(color: Colors.grey),
+    return GestureDetector(
+      onTap: () {
+        navigateTo(
+            context,
+            TransactionDetails(
+              transaction: item,
+            ));
+      },
+      child: SizedBox(
+        width: double.infinity,
+        height: size.height * 0.13,
+        child: Card(
+          elevation: 2,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 7),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Total Cost :   ",
+                      style: theme.bodyLarge!.copyWith(
+                          fontSize:
+                              isMobile ? size.width * 0.05 : size.width * 0.02,
+                          color: Colors.grey[700]),
+                    ),
+                    Text(
+                      "${item.totalCost.toString()} EGP",
+                      style: theme.bodyLarge!.copyWith(
+                          fontSize:
+                              isMobile ? size.width * 0.05 : size.width * 0.02,
+                          color: raisinBlack),
+                    ),
+                  ],
                 ),
-              )
-            ],
+                Align(
+                  alignment: Alignment.bottomRight,
+                  child: Text(
+                    formattedDate,
+                    style: theme.titleSmall!.copyWith(color: Colors.grey),
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

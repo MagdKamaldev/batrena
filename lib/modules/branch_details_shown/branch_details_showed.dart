@@ -28,7 +28,7 @@ class BranchDetailsShown extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     var textTheme = Theme.of(context).textTheme;
-
+    bool isMobile = size.width <= 600;
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: lavendarBlush),
@@ -135,7 +135,10 @@ class BranchDetailsShown extends StatelessWidget {
                                           style: Theme.of(context)
                                               .textTheme
                                               .titleSmall!
-                                              .copyWith(fontSize: 15)),
+                                              .copyWith(
+                                                  fontSize: isMobile
+                                                      ? size.height * 0.016
+                                                      : 20)),
                                     ],
                                   ),
                                 ),
@@ -176,7 +179,8 @@ class BranchDetailsShown extends StatelessWidget {
                                     Text(
                                       "Inventory",
                                       style: textTheme.bodyLarge!.copyWith(
-                                          color: lavendarBlush, fontSize: 22),
+                                          color: lavendarBlush,
+                                          fontSize: isMobile ? 15 : 22),
                                     ),
                                     SizedBox(
                                       width: size.width * 0.02,
@@ -217,7 +221,8 @@ class BranchDetailsShown extends StatelessWidget {
                                     Text(
                                       "Transactions",
                                       style: textTheme.bodyLarge!.copyWith(
-                                          color: lavendarBlush, fontSize: 22),
+                                          color: lavendarBlush,
+                                          fontSize: isMobile ? 15 : 22),
                                     ),
                                     SizedBox(
                                       width: size.width * 0.02,
