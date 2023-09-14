@@ -72,7 +72,7 @@ class CartScreen extends StatelessWidget {
       child: Card(
         elevation: 2,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+          padding: EdgeInsets.symmetric(horizontal: isMobile ? 3 : 15),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -82,7 +82,7 @@ class CartScreen extends StatelessWidget {
                   item.name,
                   style: theme.bodyLarge!.copyWith(
                       fontSize:
-                          isMobile ? size.width * 0.075 : size.width * 0.025,
+                          isMobile ? size.width * 0.05 : size.width * 0.025,
                       color: raisinBlack.shade900),
                 ),
               ),
@@ -91,23 +91,70 @@ class CartScreen extends StatelessWidget {
                   Text(
                     "${item.price} LE",
                     style: theme.bodyLarge!.copyWith(
-                        fontSize:
-                            isMobile ? size.width * 0.068 : size.width * 0.02,
+                        fontSize: isMobile ? 14 : size.width * 0.02,
                         color: Colors.grey[700]),
+                  ),
+                  SizedBox(
+                    width: size.width * 0.04,
+                  ),
+                  CircleAvatar(
+                    backgroundColor: carrebianCurrent,
+                    radius: isMobile ? 20 : size.width * 0.023,
+                    child: Center(
+                      child: IconButton(
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.add,
+                            color: lavendarBlush,
+                            size: isMobile ? 20 : size.width * 0.02,
+                          )),
+                    ),
                   ),
                   Text(
                     "    (${item.items.length})",
                     style: theme.bodyLarge!.copyWith(
                         fontSize:
-                            isMobile ? size.width * 0.068 : size.width * 0.02,
+                            isMobile ? size.width * 0.05 : size.width * 0.02,
                         color: raisinBlack),
                   ),
+                  SizedBox(
+                    width: isMobile ? 14 : size.width * 0.02,
+                  ),
+                  CircleAvatar(
+                    backgroundColor: carrebianCurrent,
+                    radius: isMobile ? 20 : size.width * 0.023,
+                    child: Column(
+                      children: [
+                        IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.minimize,
+                              color: lavendarBlush,
+                              size: isMobile ? 20 : size.width * 0.02,
+                            )),
+                      ],
+                    ),
+                  ),
+                  if (!isMobile)
+                    SizedBox(
+                      width: size.width * 0.03,
+                    ),
+                  if (!isMobile)
+                    Container(
+                      width: 4,
+                      height: double.infinity,
+                      color: lavendarBlush,
+                    ),
+                  if (!isMobile)
+                    SizedBox(
+                      width: size.width * 0.02,
+                    ),
                   IconButton(
                       onPressed: () {},
                       icon: Icon(
                         Icons.delete,
                         color: Colors.red,
-                        size: isMobile ? size.width * 0.06 : size.width * 0.02,
+                        size: isMobile ? 20 : size.width * 0.04,
                       ))
                 ],
               )

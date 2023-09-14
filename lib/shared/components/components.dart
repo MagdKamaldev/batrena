@@ -1,6 +1,7 @@
 import 'package:batrena/main.dart';
 import 'package:batrena/modules/login/login_screen.dart';
 import 'package:batrena/shared/colors.dart';
+import 'package:batrena/shared/networks/local/cache_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -74,6 +75,8 @@ void logout({
   navigateAndFinish(context, LoginScreen());
   jwt = "";
   permission = 0;
+  CacheHelper.saveData(key: "jwt", value: "");
+  CacheHelper.saveData(key: "permission", value: 0);
 }
 
 void showCustomSnackBar(
