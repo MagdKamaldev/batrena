@@ -16,17 +16,14 @@ class CartScreen extends StatelessWidget {
         var cubit = BranchViewCubit.get(context);
         TextTheme textTheme = Theme.of(context).textTheme;
         var size = MediaQuery.of(context).size;
-        bool isMobile = size.width <= 600;
-        double heightRatio = isMobile ? 1.2 : 1.05;
         bool isPc = size.width > 600;
         return Scaffold(
           appBar: AppBar(
             iconTheme: IconThemeData(color: lavendarBlush),
             title: Text(
               "${cubit.branch.name} Cart",
-                style: textTheme.bodyLarge!.copyWith(
-                    fontSize:
-                    isPc ? size.width * 0.02 : size.width * 0.05),
+              style: textTheme.bodyLarge!.copyWith(
+                  fontSize: isPc ? size.width * 0.02 : size.width * 0.05),
             ),
           ),
           body: ListView(
@@ -105,6 +102,13 @@ class CartScreen extends StatelessWidget {
                             isMobile ? size.width * 0.068 : size.width * 0.02,
                         color: raisinBlack),
                   ),
+                  IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.delete,
+                        color: Colors.red,
+                        size: isMobile ? size.width * 0.06 : size.width * 0.02,
+                      ))
                 ],
               )
             ],

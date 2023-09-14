@@ -139,17 +139,22 @@ class BranchHomeScreen extends StatelessWidget {
                     ),
                     body: SingleChildScrollView(
                       scrollDirection: Axis.vertical,
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            if (!isMobile)
-                              SizedBox(
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          if (!isMobile)
+                            SizedBox(
+                              width: size.width * 0.02,
+                            ),
+                          if (!isMobile)
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: size.height * 0.03),
+                              child: SizedBox(
                                 height: size.height,
                                 width: size.width * 0.2,
                                 child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     GestureDetector(
                                       onTap: () {
@@ -240,21 +245,26 @@ class BranchHomeScreen extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                            if (!isMobile)
-                              SizedBox(
-                                width: size.width * 0.03,
-                              ),
-                            if (!isMobile)
-                              Container(
-                                height: size.height * 0.9,
-                                width: 1,
-                                color: carrebianCurrent,
-                              ),
-                            if (!isMobile)
-                              SizedBox(
-                                width: size.width * 0.03,
-                              ),
-                            Expanded(
+                            ),
+                          if (!isMobile)
+                            SizedBox(
+                              width: size.width * 0.02,
+                            ),
+                          if (!isMobile)
+                            Container(
+                              height: size.height * 0.9,
+                              width: 1,
+                              color: carrebianCurrent,
+                            ),
+                          if (!isMobile)
+                            SizedBox(
+                              width: size.width * 0.02,
+                            ),
+                          Expanded(
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: isMobile ? 0 : size.height * 0.03,
+                                  horizontal: isMobile ? 10 : 0),
                               child: GridView.count(
                                 shrinkWrap: true,
                                 physics: const NeverScrollableScrollPhysics(),
@@ -277,8 +287,8 @@ class BranchHomeScreen extends StatelessWidget {
                                 ),
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                   );
@@ -361,7 +371,7 @@ class BranchHomeScreen extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                height: isMobile ? size.height * 0.04 : size.height * 0.02,
+                height: isMobile ? size.height * 0.04 : size.height * 0.012,
               ),
               SizedBox(
                 child: TextButton(

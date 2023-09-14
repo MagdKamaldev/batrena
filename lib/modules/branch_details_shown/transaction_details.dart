@@ -10,7 +10,6 @@ class TransactionDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
     var textTheme = Theme.of(context).textTheme;
     var cubit = BranchDetailsCubit.get(context);
     return BlocConsumer<BranchDetailsCubit, BranchDetailsState>(
