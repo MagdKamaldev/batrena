@@ -42,14 +42,14 @@ class BranchHomeScreen extends StatelessWidget {
                                     height: 50,
                                     width: double.infinity,
                                     decoration: BoxDecoration(
-                                      color: const Color.fromRGBO(238, 245, 245, 1),
+                                      color: const Color.fromRGBO(
+                                          238, 245, 245, 1),
                                       borderRadius: BorderRadius.circular(12),
                                     ),
                                     child: Center(
                                       child: Text(
                                         "Cart",
-                                        style:
-                                        textTheme.bodyLarge!.copyWith(
+                                        style: textTheme.bodyLarge!.copyWith(
                                           color: carrebianCurrent,
                                           fontSize: 20,
                                         ),
@@ -72,15 +72,15 @@ class BranchHomeScreen extends StatelessWidget {
                                     height: 50,
                                     width: double.infinity,
                                     decoration: BoxDecoration(
-                                      color: const Color.fromRGBO(238, 245, 245, 1),
+                                      color: const Color.fromRGBO(
+                                          238, 245, 245, 1),
                                       borderRadius: BorderRadius.circular(12),
                                     ),
                                     child: Center(
                                       child: Text(
                                         "Change Shift",
                                         overflow: TextOverflow.ellipsis,
-                                        style:
-                                        textTheme.bodyLarge!.copyWith(
+                                        style: textTheme.bodyLarge!.copyWith(
                                           color: carrebianCurrent,
                                           fontSize: 20,
                                         ),
@@ -99,14 +99,14 @@ class BranchHomeScreen extends StatelessWidget {
                                     height: 50,
                                     width: double.infinity,
                                     decoration: BoxDecoration(
-                                      color: const Color.fromRGBO(238, 245, 245, 1),
+                                      color: const Color.fromRGBO(
+                                          238, 245, 245, 1),
                                       borderRadius: BorderRadius.circular(12),
                                     ),
                                     child: Center(
                                       child: Text(
                                         "Logout",
-                                        style:
-                                        textTheme.bodyLarge!.copyWith(
+                                        style: textTheme.bodyLarge!.copyWith(
                                           color: carrebianCurrent,
                                           fontSize: 20,
                                         ),
@@ -159,8 +159,10 @@ class BranchHomeScreen extends StatelessWidget {
                                         height: 50,
                                         width: double.infinity,
                                         decoration: BoxDecoration(
-                                          color: const Color.fromRGBO(238, 245, 245, 1),
-                                          borderRadius: BorderRadius.circular(12),
+                                          color: const Color.fromRGBO(
+                                              238, 245, 245, 1),
+                                          borderRadius:
+                                              BorderRadius.circular(12),
                                         ),
                                         child: Center(
                                           child: Text(
@@ -189,8 +191,10 @@ class BranchHomeScreen extends StatelessWidget {
                                         height: 50,
                                         width: double.infinity,
                                         decoration: BoxDecoration(
-                                          color: const Color.fromRGBO(238, 245, 245, 1),
-                                          borderRadius: BorderRadius.circular(12),
+                                          color: const Color.fromRGBO(
+                                              238, 245, 245, 1),
+                                          borderRadius:
+                                              BorderRadius.circular(12),
                                         ),
                                         child: Center(
                                           child: Text(
@@ -216,8 +220,10 @@ class BranchHomeScreen extends StatelessWidget {
                                         height: 50,
                                         width: double.infinity,
                                         decoration: BoxDecoration(
-                                          color: const Color.fromRGBO(238, 245, 245, 1),
-                                          borderRadius: BorderRadius.circular(12),
+                                          color: const Color.fromRGBO(
+                                              238, 245, 245, 1),
+                                          borderRadius:
+                                              BorderRadius.circular(12),
                                         ),
                                         child: Center(
                                           child: Text(
@@ -255,7 +261,7 @@ class BranchHomeScreen extends StatelessWidget {
                                 crossAxisCount: isMobile ? 2 : 6,
                                 mainAxisSpacing: isMobile ? 16 : 20,
                                 crossAxisSpacing: isMobile ? 16 : 20,
-                                childAspectRatio: 1.2 / (heightRatio+0.14),
+                                childAspectRatio: 1.2 / (heightRatio + 0.14),
                                 children: List.generate(
                                   cubit.branch.parentItems.length,
                                   (index) => Padding(
@@ -342,7 +348,6 @@ class BranchHomeScreen extends StatelessWidget {
                                 ? size.width * 0.05
                                 : size.width * 0.013),
                       ),
-
                       Text(
                         "(${item.items.length.toString()})",
                         style: textTheme.titleMedium!.copyWith(
@@ -351,7 +356,6 @@ class BranchHomeScreen extends StatelessWidget {
                                 : size.width * 0.013,
                             color: lavendarBlush),
                       ),
-
                     ],
                   ),
                 ],

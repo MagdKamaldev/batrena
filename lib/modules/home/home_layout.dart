@@ -28,7 +28,7 @@ class _HomeLayoutState extends State<HomeLayout> {
     var cubit = AppCubit.get(context);
     var size = MediaQuery.of(context).size;
     bool isMobile = size.width <= 600;
-    double heightRatio = isMobile ? 1.2 : 1.05;
+    double heightRatio = isMobile ? 0.8 : 1.2;
     bool isPc = size.width > 600;
     var textTheme = Theme.of(context).textTheme;
     return BlocConsumer<AppCubit, AppStates>(
@@ -40,8 +40,7 @@ class _HomeLayoutState extends State<HomeLayout> {
             title: Text(
               "Batrena Manager",
               style: textTheme.bodyLarge!.copyWith(
-                  fontSize:
-                  isPc ? size.width * 0.02 : size.width * 0.05),
+                  fontSize: isPc ? size.width * 0.02 : size.width * 0.05),
             ),
           ),
           drawer: const AppDrawer(),
@@ -85,7 +84,7 @@ class _HomeLayoutState extends State<HomeLayout> {
                       crossAxisCount: 2,
                       mainAxisSpacing: 20,
                       crossAxisSpacing: 20,
-                      childAspectRatio: 1 / 1.3,
+                      childAspectRatio: heightRatio,
                       children: List.generate(
                         cubit.branches.length,
                         (index) => buildBranchItem(
@@ -120,6 +119,7 @@ class _HomeLayoutState extends State<HomeLayout> {
     required Branch branch,
   }) {
     var size = MediaQuery.of(context).size;
+    bool isMobile = size.width <= 600;
     var textTheme = Theme.of(context).textTheme;
     return GestureDetector(
       onTap: () {
@@ -144,11 +144,14 @@ class _HomeLayoutState extends State<HomeLayout> {
                 children: [
                   Text(
                     branch.name,
-                    style:
-                        textTheme.titleMedium!.copyWith(color: lavendarBlush),
+                    style: textTheme.titleMedium!.copyWith(
+                        color: lavendarBlush,
+                        fontSize:
+                            isMobile ? size.width * 0.06 : size.width * 0.03),
                   ),
                   SizedBox(
-                      height: size.height * 0.03,
+                      height: isMobile ? size.height * 0.03 : size.height * 0.1,
+                      width: isMobile ? size.width * 0.1 : size.width * 0.3,
                       child: Image.asset("assets/images/branch.png")),
                 ],
               ),
@@ -160,13 +163,11 @@ class _HomeLayoutState extends State<HomeLayout> {
                 height: 1,
                 color: lavendarBlush,
               ),
-              SizedBox(
-                height: size.height * 0.02,
-              ),
+              const Spacer(),
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: SizedBox(
-                  height: size.height * 0.1,
+                  height: isMobile ? size.height * 0.08 : size.height * 0.3,
                   child: Hero(
                     tag: "branch ${branch.id}",
                     child: Image.asset(
@@ -182,8 +183,10 @@ class _HomeLayoutState extends State<HomeLayout> {
                 children: [
                   Text(
                     "Details",
-                    style:
-                        textTheme.titleMedium!.copyWith(color: lavendarBlush),
+                    style: textTheme.titleMedium!.copyWith(
+                        color: lavendarBlush,
+                        fontSize:
+                            isMobile ? size.width * 0.06 : size.width * 0.03),
                   ),
                   Icon(
                     Icons.navigate_next,
