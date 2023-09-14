@@ -19,13 +19,15 @@ class ChangeShiftCubit extends Cubit<ChangeShiftStates> {
       "token": otp,
     }).then((value) {
       showCustomSnackBar(context, value.data["message"], Colors.green);
+      navigateAndFinish(context, const MyApp());
       emit(CheckOTPSuccessState());
     }).catchError((error) {
-      if (Platform.isAndroid) {
-        SystemNavigator.pop();
-      } else if (Platform.isIOS) {
-        exit(0);
-      }
+      showCustomSnackBar(context, "Invalid OTP", Colors.red);
+      // if (Platform.isAndroid) {
+      //   SystemNavigator.pop();
+      // } else if (Platform.isIOS) {
+      //   exit(0);
+      // }
       emit(CheckOTPErrorState());
     });
   }

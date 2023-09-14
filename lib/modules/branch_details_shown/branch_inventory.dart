@@ -23,7 +23,7 @@ class BranchInventory extends StatelessWidget {
           appBar: AppBar(
             iconTheme: IconThemeData(color: lavendarBlush),
             title: Text(
-              " ${branch.name} inventory",
+              " ${branch.name} Inventory",
               style: textTheme.bodyLarge,
             ),
           ),

@@ -34,18 +34,25 @@ class BranchHomeScreen extends StatelessWidget {
                                 const SizedBox(
                                   height: 50,
                                 ),
-                                ElevatedButton(
-                                  onPressed: () {
+                                GestureDetector(
+                                  onTap: () {
                                     navigateTo(context, const CartScreen());
                                   },
-                                  child: SizedBox(
-                                    height: 40,
+                                  child: Container(
+                                    height: 50,
                                     width: double.infinity,
+                                    decoration: BoxDecoration(
+                                      color: const Color.fromRGBO(238, 245, 245, 1),
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
                                     child: Center(
                                       child: Text(
                                         "Cart",
-                                        style: textTheme.bodyLarge!
-                                            .copyWith(color: carrebianCurrent),
+                                        style:
+                                        textTheme.bodyLarge!.copyWith(
+                                          color: carrebianCurrent,
+                                          fontSize: 20,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -53,22 +60,30 @@ class BranchHomeScreen extends StatelessWidget {
                                 SizedBox(
                                   height: size.height * 0.03,
                                 ),
-                                ElevatedButton(
-                                  onPressed: () {
+                                GestureDetector(
+                                  onTap: () {
                                     navigateTo(
                                         context,
                                         ChangeShiftScreen(
                                           branch: cubit.branch,
                                         ));
                                   },
-                                  child: SizedBox(
-                                    height: 40,
+                                  child: Container(
+                                    height: 50,
                                     width: double.infinity,
+                                    decoration: BoxDecoration(
+                                      color: const Color.fromRGBO(238, 245, 245, 1),
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
                                     child: Center(
                                       child: Text(
                                         "Change Shift",
-                                        style: textTheme.bodyLarge!
-                                            .copyWith(color: carrebianCurrent),
+                                        overflow: TextOverflow.ellipsis,
+                                        style:
+                                        textTheme.bodyLarge!.copyWith(
+                                          color: carrebianCurrent,
+                                          fontSize: 20,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -76,18 +91,25 @@ class BranchHomeScreen extends StatelessWidget {
                                 SizedBox(
                                   height: size.height * 0.03,
                                 ),
-                                ElevatedButton(
-                                  onPressed: () {
+                                GestureDetector(
+                                  onTap: () {
                                     logout(context: context);
                                   },
-                                  child: SizedBox(
-                                    height: 40,
+                                  child: Container(
+                                    height: 50,
                                     width: double.infinity,
+                                    decoration: BoxDecoration(
+                                      color: const Color.fromRGBO(238, 245, 245, 1),
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
                                     child: Center(
                                       child: Text(
                                         "Logout",
-                                        style: textTheme.bodyLarge!
-                                            .copyWith(color: carrebianCurrent),
+                                        style:
+                                        textTheme.bodyLarge!.copyWith(
+                                          color: carrebianCurrent,
+                                          fontSize: 20,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -102,7 +124,7 @@ class BranchHomeScreen extends StatelessWidget {
                         "${cubit.branch.name} (${cubit.branch.currentShift.employee.name})",
                         style: textTheme.bodyLarge!.copyWith(
                             fontSize:
-                                isPc ? size.width * 0.03 : size.width * 0.05),
+                                isPc ? size.width * 0.02 : size.width * 0.05),
                       ),
                     ),
                     floatingActionButton: FloatingActionButton(
@@ -129,13 +151,17 @@ class BranchHomeScreen extends StatelessWidget {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    ElevatedButton(
-                                      onPressed: () {
+                                    GestureDetector(
+                                      onTap: () {
                                         navigateTo(context, const CartScreen());
                                       },
-                                      child: SizedBox(
-                                        height: 40,
+                                      child: Container(
+                                        height: 50,
                                         width: double.infinity,
+                                        decoration: BoxDecoration(
+                                          color: const Color.fromRGBO(238, 245, 245, 1),
+                                          borderRadius: BorderRadius.circular(12),
+                                        ),
                                         child: Center(
                                           child: Text(
                                             "Cart",
@@ -151,17 +177,21 @@ class BranchHomeScreen extends StatelessWidget {
                                     SizedBox(
                                       height: size.height * 0.03,
                                     ),
-                                    ElevatedButton(
-                                      onPressed: () {
+                                    GestureDetector(
+                                      onTap: () {
                                         navigateTo(
                                             context,
                                             ChangeShiftScreen(
                                               branch: cubit.branch,
                                             ));
                                       },
-                                      child: SizedBox(
-                                        height: 40,
+                                      child: Container(
+                                        height: 50,
                                         width: double.infinity,
+                                        decoration: BoxDecoration(
+                                          color: const Color.fromRGBO(238, 245, 245, 1),
+                                          borderRadius: BorderRadius.circular(12),
+                                        ),
                                         child: Center(
                                           child: Text(
                                             "Change Shift",
@@ -178,13 +208,17 @@ class BranchHomeScreen extends StatelessWidget {
                                     SizedBox(
                                       height: size.height * 0.03,
                                     ),
-                                    ElevatedButton(
-                                      onPressed: () {
+                                    GestureDetector(
+                                      onTap: () {
                                         logout(context: context);
                                       },
-                                      child: SizedBox(
-                                        height: 40,
+                                      child: Container(
+                                        height: 50,
                                         width: double.infinity,
+                                        decoration: BoxDecoration(
+                                          color: const Color.fromRGBO(238, 245, 245, 1),
+                                          borderRadius: BorderRadius.circular(12),
+                                        ),
                                         child: Center(
                                           child: Text(
                                             "Logout",
@@ -221,7 +255,7 @@ class BranchHomeScreen extends StatelessWidget {
                                 crossAxisCount: isMobile ? 2 : 6,
                                 mainAxisSpacing: isMobile ? 16 : 20,
                                 crossAxisSpacing: isMobile ? 16 : 20,
-                                childAspectRatio: 1 / heightRatio,
+                                childAspectRatio: 1.2 / (heightRatio+0.14),
                                 children: List.generate(
                                   cubit.branch.parentItems.length,
                                   (index) => Padding(
@@ -283,7 +317,7 @@ class BranchHomeScreen extends StatelessWidget {
                     item.name,
                     style: textTheme.bodyLarge!.copyWith(
                       fontSize:
-                          isMobile ? size.width * 0.08 : size.width * 0.023,
+                          isMobile ? size.width * 0.07 : size.width * 0.018,
                     ),
                   ),
                   SizedBox(
@@ -308,6 +342,7 @@ class BranchHomeScreen extends StatelessWidget {
                                 ? size.width * 0.05
                                 : size.width * 0.013),
                       ),
+
                       Text(
                         "(${item.items.length.toString()})",
                         style: textTheme.titleMedium!.copyWith(
@@ -316,12 +351,13 @@ class BranchHomeScreen extends StatelessWidget {
                                 : size.width * 0.013,
                             color: lavendarBlush),
                       ),
+
                     ],
                   ),
                 ],
               ),
               SizedBox(
-                height: isMobile ? size.height * 0.03 : size.height * 0.01,
+                height: isMobile ? size.height * 0.04 : size.height * 0.02,
               ),
               SizedBox(
                 child: TextButton(

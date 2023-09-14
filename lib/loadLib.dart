@@ -7,7 +7,7 @@ import 'dart:io';
 DynamicLibrary loadLibForFlutter(String pathAndroid, String pathWindows) =>
     Platform.isIOS
         ? DynamicLibrary.process()
-        : Platform.isMacOS && Abi.current() == Abi.macosX64
+        : Platform.isMacOS
             ? DynamicLibrary.executable()
             : Platform.isAndroid
                 ? DynamicLibrary.open(pathAndroid)

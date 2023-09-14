@@ -52,14 +52,14 @@ class BranchTransactions extends StatelessWidget {
   }
 
   Widget parentItem({
-    required item,
+    required Transaction item,
     required TextTheme theme,
     required BuildContext context,
     required BranchDetailsCubit cubit,
   }) {
     var size = MediaQuery.of(context).size;
     bool isMobile = size.width <= 600;
-    String dateString = item["CreatedAt"];
+    String dateString = item.createdAt;
     String formattedDate =
         DateFormat('dd-MM-yyyy / HH:mm').format(DateTime.parse(dateString));
     return SizedBox(
@@ -83,7 +83,7 @@ class BranchTransactions extends StatelessWidget {
                         color: Colors.grey[700]),
                   ),
                   Text(
-                    "${item["total_cost"].toString()} EGP",
+                    "${item.totalCost.toString()} EGP",
                     style: theme.bodyLarge!.copyWith(
                         fontSize:
                             isMobile ? size.width * 0.05 : size.width * 0.02,

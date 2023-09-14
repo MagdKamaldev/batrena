@@ -76,7 +76,7 @@ class BranchDetailsShown extends StatelessWidget {
                       padding:
                           EdgeInsets.symmetric(horizontal: size.width * 0.04),
                       child: Text(
-                        "Current Shift: Tasbeeh",
+                        "Current Shift: ${branch.currentShift.employee.name}",
                         style:
                             textTheme.bodyLarge!.copyWith(color: raisinBlack),
                       ),
@@ -171,11 +171,12 @@ class BranchDetailsShown extends StatelessWidget {
                                       ));
                                 },
                                 child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
                                       "Inventory",
                                       style: textTheme.bodyLarge!.copyWith(
-                                          color: lavendarBlush, fontSize: 16),
+                                          color: lavendarBlush, fontSize: 22),
                                     ),
                                     SizedBox(
                                       width: size.width * 0.02,
@@ -211,11 +212,12 @@ class BranchDetailsShown extends StatelessWidget {
                                       ));
                                 },
                                 child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
                                       "Transactions",
                                       style: textTheme.bodyLarge!.copyWith(
-                                          color: lavendarBlush, fontSize: 16),
+                                          color: lavendarBlush, fontSize: 22),
                                     ),
                                     SizedBox(
                                       width: size.width * 0.02,

@@ -18,7 +18,6 @@ class BranchDetailsCubit extends Cubit<BranchDetailsState> {
       data: {"branch_id": branchId},
     ).then((value) async {
       try {
-    
         // Uint8List bytes = Uint8List.fromList(excelData.codeUnits);
         String path = await FileSaver.instance.saveFile(
           name: branch.name == "" ? "File" : "${branch.name}_Transactions",

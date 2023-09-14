@@ -29,7 +29,7 @@ class ChangeShiftScreen extends StatelessWidget {
             title: Text(
               "Change shift (${branch.name})",
               style: theme.bodyLarge!.copyWith(
-                  fontSize: isPc ? size.width * 0.03 : size.width * 0.05),
+                  fontSize: isPc ? size.width * 0.02 : size.width * 0.05),
             ),
           ),
           body: Form(
@@ -47,7 +47,7 @@ class ChangeShiftScreen extends StatelessWidget {
                       child: Image.asset("assets/images/replacement.png")),
                 ),
                 SizedBox(
-                  height: size.height * 0.15,
+                  height: size.height * 0.05,
                 ),
                 Text(
                   "Enter code to confirm change",
@@ -79,21 +79,29 @@ class ChangeShiftScreen extends StatelessWidget {
                 ),
                 const Spacer(),
                 SizedBox(
-                  width: isPc ? size.width * 0.9 : double.infinity,
+                  width: isPc ? size.width * 0.8 : double.infinity,
                   height: size.height * 0.08,
-                  child: MaterialButton(
-                    color: carrebianCurrent,
-                    onPressed: () {
+                  child: GestureDetector(
+
+                    onTap: () {
                       if (formKey.currentState!.validate()) {
                         cubit.checkOtp(
                             otp: codeController.text, context: context);
                       }
                     },
-                    child: Text(
-                      "Confirm OTP",
-                      style: theme.bodyLarge!.copyWith(
-                          fontSize:
-                              isPc ? size.width * 0.03 : size.width * 0.05),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: carrebianCurrent,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Center(
+                        child: Text(
+                          "Confirm OTP",
+                          style: theme.bodyLarge!.copyWith(
+                              fontSize:
+                                  isPc ? size.width * 0.03 : size.width * 0.05),
+                        ),
+                      ),
                     ),
                   ),
                 ),

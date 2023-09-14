@@ -19,8 +19,13 @@ class AppDrawer extends StatelessWidget {
             onTap: () {
               navigateTo(context, HeatMapScreen());
             },
-            child: SizedBox(
-              height: 70,
+            child: Container(
+                height: 60,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: const Color.fromRGBO(238, 245, 245, 1),
+                  borderRadius: BorderRadius.circular(12),
+                ),
               child: Card(
                 elevation: 3,
                 child: Row(
@@ -42,14 +47,19 @@ class AppDrawer extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: size.height * 0.08,
+            height: size.height * 0.03,
           ),
           GestureDetector(
             onTap: () {
               logout(context: context);
             },
-            child: SizedBox(
-              height: 70,
+            child: Container(
+              height: 60,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: const Color.fromRGBO(238, 245, 245, 1),
+                borderRadius: BorderRadius.circular(12),
+              ),
               child: Card(
                 elevation: 3,
                 child: Row(

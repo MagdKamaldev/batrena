@@ -15,12 +15,18 @@ class CartScreen extends StatelessWidget {
       builder: (context, state) {
         var cubit = BranchViewCubit.get(context);
         TextTheme textTheme = Theme.of(context).textTheme;
+        var size = MediaQuery.of(context).size;
+        bool isMobile = size.width <= 600;
+        double heightRatio = isMobile ? 1.2 : 1.05;
+        bool isPc = size.width > 600;
         return Scaffold(
           appBar: AppBar(
             iconTheme: IconThemeData(color: lavendarBlush),
             title: Text(
               "${cubit.branch.name} Cart",
-              style: textTheme.bodyLarge,
+                style: textTheme.bodyLarge!.copyWith(
+                    fontSize:
+                    isPc ? size.width * 0.02 : size.width * 0.05),
             ),
           ),
           body: ListView(
@@ -45,7 +51,7 @@ class CartScreen extends StatelessWidget {
                       cubit.checkout(context);
                     },
                     child: Text(
-                      "Chekout (${cubit.totalPrice} EGP)",
+                      "Checkout (${cubit.totalPrice} EGP)",
                       style: textTheme.bodyLarge,
                     ))),
             fallback: (context) => const Center(

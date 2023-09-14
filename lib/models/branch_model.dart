@@ -90,8 +90,9 @@ class Item {
   int? id;
   int? parentItemId;
   String? name;
-  double price;
-  bool isSold;
+  double? price;
+  bool? isSold;
+  String? createdAt;
 
   Item({
     this.id,
@@ -102,13 +103,18 @@ class Item {
   });
 
   factory Item.fromJson(Map<String, dynamic> json) {
-    return Item(
+    double price = 0;
+    if (json['price'] != null && json["price"] != "") {
+      price = double.parse(json['price'].toString());
+    }
+    Item item = Item(
       id: json['ID'],
       parentItemId: json['parent_item_id'],
       name: json['name'] ?? "",
-      price: double.parse(json['price'].toString()),
+      price: price,
       isSold: json['is_sold'],
     );
+    return item;
   }
 
   Map<String, dynamic> toJson() {
@@ -171,7 +177,7 @@ class Branch {
   String address;
   LatLng latLng;
   List<ParentItem> parentItems;
-  List<dynamic>? transactions;
+  List<Transaction>? transactions;
   HeatMap heatMap;
   int totalSold;
   int soldToday;
@@ -203,7 +209,11 @@ class Branch {
     var shiftJsonList = json['shifts'] as List;
     List<Shift> shiftList =
         shiftJsonList.map((shift) => Shift.fromJson(shift)).toList();
-
+    List<Transaction> transactions = [];
+    if (json['transactions'] != null && json['transactions'].isNotEmpty) {
+      var transactionsListJson = json['transactions'] as List;
+      transactions = transactionsListJson.map((transaction) => Transaction.fromJson(transaction)).toList();
+    }
     return Branch(
       id: json['ID'],
       createdAt: json['CreatedAt'],
@@ -213,7 +223,7 @@ class Branch {
       address: json['address'],
       latLng: LatLng.fromJson(json['lat_lng']),
       parentItems: parentItemList,
-      transactions: json['transactions'],
+      transactions: transactions,
       heatMap: HeatMap.fromJson(json['heat_map']),
       totalSold: json['total_sold'],
       soldToday: json['sold_today'],
@@ -248,8 +258,8 @@ class Transaction {
   String updatedAt;
   dynamic deletedAt;
   int branchId;
-  List<Item> items;
-  List<Item> itemsStruct; // Add this field
+  List<int>? items;
+  List<Item>? itemsStruct; // Add this field
   int totalCost; // Add this field
 
   Transaction({
@@ -264,12 +274,21 @@ class Transaction {
   });
 
   factory Transaction.fromJson(Map<String, dynamic> json) {
-    List<Item> itemList = [];
+    // print(json);
+    List<int> itemList = [];
+    List<Item> itemsStructList = [];
     if (json["items"] != null) {
       var itemJsonList = json['items'] as List;
-      itemList = itemJsonList.map((item) => Item.fromJson(item)).toList();
-    }
+      itemList = itemJsonList.map((item) => item["id"] as int).toList();
 
+    }
+    if (json["ItemsStruct"] != null && json["ItemsStruct"].isNotEmpty) {
+      var itemJsonList = json['ItemsStruct'] as List;
+      itemsStructList = itemJsonList.map((item) => Item.fromJson(item)).toList();
+      // itemsStructList = json['ItemsStruct']
+      //     .map((e) => Item.fromJson(e))
+      //     .toList();
+    }
     return Transaction(
       id: json['ID'],
       createdAt: json['CreatedAt'],
@@ -277,9 +296,8 @@ class Transaction {
       deletedAt: json['DeletedAt'],
       branchId: json['branch_id'],
       items: itemList,
-      itemsStruct: json['ItemsStruct']
-          .map((e) => Item.fromJson(e))
-          .toList(), // Update to include ItemsStruct
+      // itemsStruct: null,
+      itemsStruct: itemsStructList, // Update to include ItemsStruct
       totalCost: json['total_cost'], // Update to include total_cost
     );
   }
@@ -291,8 +309,8 @@ class Transaction {
       'UpdatedAt': updatedAt,
       'DeletedAt': deletedAt,
       'branch_id': branchId,
-      'items': items.map((item) => item.toJson()).toList(),
-      'ItemsStruct': itemsStruct
+      'items': items!.map((item) => {"id": item}).toList(),
+      'ItemsStruct': itemsStruct!
           .map((e) => e.toJson())
           .toList(), // Include ItemsStruct in JSON output
       'total_cost': totalCost, // Include total_cost in JSON output

@@ -27,6 +27,9 @@ class _HomeLayoutState extends State<HomeLayout> {
   Widget build(BuildContext context) {
     var cubit = AppCubit.get(context);
     var size = MediaQuery.of(context).size;
+    bool isMobile = size.width <= 600;
+    double heightRatio = isMobile ? 1.2 : 1.05;
+    bool isPc = size.width > 600;
     var textTheme = Theme.of(context).textTheme;
     return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {},
@@ -36,7 +39,9 @@ class _HomeLayoutState extends State<HomeLayout> {
             iconTheme: IconThemeData(color: lavendarBlush),
             title: Text(
               "Batrena Manager",
-              style: textTheme.bodyLarge,
+              style: textTheme.bodyLarge!.copyWith(
+                  fontSize:
+                  isPc ? size.width * 0.02 : size.width * 0.05),
             ),
           ),
           drawer: const AppDrawer(),

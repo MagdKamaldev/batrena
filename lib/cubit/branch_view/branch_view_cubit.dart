@@ -39,11 +39,11 @@ class BranchViewCubit extends Cubit<BranchViewStates> {
     if (!isAdded) {
       parentItems.add(ParentItem(
           id: item.parentItemId,
-          price: item.price,
+          price: item.price!,
           name: parent.name,
           items: [item]));
     }
-    totalPrice = totalPrice + item.price;
+    totalPrice = totalPrice + item.price!;
     cartItems.add(item);
     parent.items.remove(item);
     showCustomSnackBar(context, "Added Successfully", Colors.green);
