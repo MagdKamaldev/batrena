@@ -8,6 +8,10 @@ class AddToCart extends BranchViewStates {}
 
 class RemoveFromCart extends BranchViewStates {}
 
+class IncrementItems extends BranchViewStates {}
+
+class DecrementItems extends BranchViewStates {}
+
 class CheckOutLoadingState extends BranchViewStates {}
 
 class CheckOutSuccessState extends BranchViewStates {}
