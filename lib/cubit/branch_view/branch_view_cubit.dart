@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:batrena/main.dart';
 import 'package:batrena/models/branch_model.dart';
 import 'package:batrena/shared/components/components.dart';
@@ -46,8 +48,26 @@ class BranchViewCubit extends Cubit<BranchViewStates> {
     totalPrice = totalPrice + item.price!;
     cartItems.add(item);
     parent.items.remove(item);
+
     showCustomSnackBar(context, "Added Successfully", Colors.green);
     emit(AddToCart());
+  }
+
+  void deleteParentItemFromCart({
+    required Item item,
+    required ParentItem parent,
+    required BuildContext context,
+  }) async {
+    parentItems.remove(parent);
+    branch.parentItems.add(parent);
+    await loadData;
+    num itemsPrices = 0.0;
+    for (item in parent.items) {
+      itemsPrices = itemsPrices + item.price!;
+    }
+    totalPrice = totalPrice - itemsPrices;
+    showCustomSnackBar(context, "Deleted Successfully", Colors.red);
+    emit(RemoveFromCart());
   }
 
   List<Map<String, int>> itemIds = [];
@@ -63,6 +83,7 @@ class BranchViewCubit extends Cubit<BranchViewStates> {
     }).then((value) {
       cartItems.clear();
       parentItems.clear();
+      totalPrice = 0.0;
       showCustomSnackBar(context, value.data["message"], Colors.green);
       Navigator.pop(context);
       emit(CheckOutSuccessState());

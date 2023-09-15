@@ -6,6 +6,8 @@ class BranchViewInitial extends BranchViewStates {}
 
 class AddToCart extends BranchViewStates {}
 
+class RemoveFromCart extends BranchViewStates {}
+
 class CheckOutLoadingState extends BranchViewStates {}
 
 class CheckOutSuccessState extends BranchViewStates {}

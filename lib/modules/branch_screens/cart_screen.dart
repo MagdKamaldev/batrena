@@ -150,7 +150,13 @@ class CartScreen extends StatelessWidget {
                       width: size.width * 0.02,
                     ),
                   IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        BranchViewCubit.get(context).deleteParentItemFromCart(
+                          item: item.items[0],
+                          parent: item,
+                          context: context,
+                        );
+                      },
                       icon: Icon(
                         Icons.delete,
                         color: Colors.red,
