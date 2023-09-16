@@ -54,6 +54,7 @@ dependencies:
  
 
 dev_dependencies:
+  flutter_launcher_icons: "^0.13.1"
   flutter_test:
     sdk: flutter
 
@@ -104,3 +105,19 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path_ios: "assets/icons/squareIcon.png"
+  image_path_android: "assets/icons/circleIcon.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+  windows:
+    generate: true
+    image_path: "assets/icons/squareIcon.png"
+    icon_size: 48 # min:48, max:256, default: 48
+  macos:
+    generate: true
+    image_path: "assets/icons/circleIcon.png"
+  linux:
+    generate: true
+    image_path: "assets/icons/circleIcon.png"
