@@ -1,5 +1,4 @@
 // ignore_for_file: use_build_context_synchronously
-
 import 'package:batrena/main.dart';
 import 'package:batrena/models/branch_model.dart';
 import 'package:batrena/shared/components/components.dart';
@@ -69,6 +68,16 @@ class BranchViewCubit extends Cubit<BranchViewStates> {
     showCustomSnackBar(context, "Deleted Successfully", Colors.red);
     emit(RemoveFromCart());
   }
+
+  // void decrementItem({
+  //   required Item item,
+  //   required ParentItem parent,
+  // })  {
+  //   cartItems.remove(item);
+  //   parent.items.remove(item);
+  //   totalPrice = totalPrice + item.price!;
+  //   emit(DecrementItems());
+  // }
 
   List<Map<String, int>> itemIds = [];
   void checkout(context) {
