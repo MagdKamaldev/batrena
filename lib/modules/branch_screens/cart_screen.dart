@@ -95,44 +95,51 @@ class CartScreen extends StatelessWidget {
                         color: Colors.grey[700]),
                   ),
                   SizedBox(
-                    width: size.width * 0.04,
+                    width: size.width * 0.05,
                   ),
-                  CircleAvatar(
-                    backgroundColor: carrebianCurrent,
-                    radius: isMobile ? 20 : size.width * 0.023,
-                    child: Center(
-                      child: IconButton(
-                          onPressed: () {},
-                          icon: Icon(
+                  ClipOval(
+                    child: Material(
+                      color: carrebianCurrent,
+                      child: InkWell(
+                        onTap: () {},
+                        child: SizedBox(
+                          width: isMobile ? size.width * 0.09 : 40,
+                          height: isMobile ? size.width * 0.09 : 40,
+                          child: Icon(
                             Icons.add,
                             color: lavendarBlush,
-                            size: isMobile ? 20 : size.width * 0.02,
-                          )),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
+                  SizedBox(
+                    width: isMobile ? 10 : size.width * 0.02,
+                  ),
                   Text(
-                    "    (${item.items.length})",
+                    "${item.items.length}",
                     style: theme.bodyLarge!.copyWith(
                         fontSize:
                             isMobile ? size.width * 0.05 : size.width * 0.02,
                         color: raisinBlack),
                   ),
                   SizedBox(
-                    width: isMobile ? 14 : size.width * 0.02,
+                    width: isMobile ? 10 : size.width * 0.02,
                   ),
-                  CircleAvatar(
-                    backgroundColor: carrebianCurrent,
-                    radius: isMobile ? 20 : size.width * 0.023,
-                    child: Column(
-                      children: [
-                        IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              Icons.minimize,
-                              color: lavendarBlush,
-                              size: isMobile ? 20 : size.width * 0.02,
-                            )),
-                      ],
+                  ClipOval(
+                    child: Material(
+                      color: carrebianCurrent,
+                      child: InkWell(
+                        onTap: () {},
+                        child: SizedBox(
+                          width: isMobile ? size.width * 0.09 : 40,
+                          height: isMobile ? size.width * 0.09 : 40,
+                          child: Icon(
+                            Icons.remove,
+                            color: lavendarBlush,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                   if (!isMobile)
@@ -160,7 +167,7 @@ class CartScreen extends StatelessWidget {
                       icon: Icon(
                         Icons.delete,
                         color: Colors.red,
-                        size: isMobile ? 20 : size.width * 0.04,
+                        size: isMobile ? 25 : size.width * 0.04,
                       ))
                 ],
               )
