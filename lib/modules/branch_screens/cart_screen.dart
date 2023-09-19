@@ -49,7 +49,8 @@ class CartScreen extends StatelessWidget {
                     },
                     child: Text(
                       "Checkout (${cubit.totalPrice} EGP)",
-                      style: textTheme.bodyLarge,
+                      style: textTheme.bodyLarge!
+                          .copyWith(fontSize: size.height * 0.037),
                     ))),
             fallback: (context) => const Center(
               child: CircularProgressIndicator(),

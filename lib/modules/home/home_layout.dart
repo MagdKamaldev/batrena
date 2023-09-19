@@ -1,4 +1,3 @@
-import 'package:batrena/modules/add_branch/branch_details.dart';
 import 'package:batrena/modules/branch_details_shown/branch_details_showed.dart';
 import 'package:batrena/modules/home/drawer.dart';
 import 'package:batrena/shared/colors.dart';
@@ -64,7 +63,7 @@ class _HomeLayoutState extends State<HomeLayout> {
                         ),
                         const Spacer(),
                         SizedBox(
-                            width: size.width * 0.4,
+                            width: size.width * 0.3,
                             height: size.height * 0.08,
                             child: Image.asset("assets/images/branches.png")),
                       ],
@@ -99,16 +98,16 @@ class _HomeLayoutState extends State<HomeLayout> {
               ),
             ),
           ),
-          floatingActionButton: FloatingActionButton(
-            backgroundColor: carrebianCurrent,
-            onPressed: () {
-              navigateTo(context, BranchDetails());
-            },
-            child: Icon(
-              Icons.add,
-              color: lavendarBlush,
-            ),
-          ),
+          // floatingActionButton: FloatingActionButton(
+          //   backgroundColor: carrebianCurrent,
+          //   onPressed: () {
+          //     navigateTo(context, BranchDetails());
+          //   },
+          //   child: Icon(
+          //     Icons.add,
+          //     color: lavendarBlush,
+          //   ),
+          // ),
         );
       },
     );
@@ -145,13 +144,14 @@ class _HomeLayoutState extends State<HomeLayout> {
                   Text(
                     branch.name,
                     style: textTheme.titleMedium!.copyWith(
+                        overflow: TextOverflow.ellipsis,
                         color: lavendarBlush,
                         fontSize:
-                            isMobile ? size.width * 0.06 : size.width * 0.03),
+                            isMobile ? size.width * 0.05 : size.width * 0.03),
                   ),
                   SizedBox(
                       height: isMobile ? size.height * 0.03 : size.height * 0.1,
-                      width: isMobile ? size.width * 0.1 : size.width * 0.3,
+                      width: isMobile ? size.width * 0.06 : size.width * 0.3,
                       child: Image.asset("assets/images/branch.png")),
                 ],
               ),
@@ -186,7 +186,7 @@ class _HomeLayoutState extends State<HomeLayout> {
                     style: textTheme.titleMedium!.copyWith(
                         color: lavendarBlush,
                         fontSize:
-                            isMobile ? size.width * 0.06 : size.width * 0.03),
+                            isMobile ? size.width * 0.055 : size.width * 0.03),
                   ),
                   Icon(
                     Icons.navigate_next,

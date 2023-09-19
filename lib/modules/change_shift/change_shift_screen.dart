@@ -82,7 +82,6 @@ class ChangeShiftScreen extends StatelessWidget {
                   width: isPc ? size.width * 0.8 : double.infinity,
                   height: size.height * 0.08,
                   child: GestureDetector(
-
                     onTap: () {
                       if (formKey.currentState!.validate()) {
                         cubit.checkOtp(
@@ -92,7 +91,7 @@ class ChangeShiftScreen extends StatelessWidget {
                     child: Container(
                       decoration: BoxDecoration(
                         color: carrebianCurrent,
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: isPc ? BorderRadius.circular(12) : null,
                       ),
                       child: Center(
                         child: Text(

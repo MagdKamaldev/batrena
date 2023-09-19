@@ -25,6 +25,7 @@ class BranchViewCubit extends Cubit<BranchViewStates> {
   double totalPrice = 0.0;
   List<Item> cartItems = [];
   List<ParentItem> parentItems = [];
+
   void addTocart({
     required Item item,
     required ParentItem parent,
@@ -44,13 +45,15 @@ class BranchViewCubit extends Cubit<BranchViewStates> {
           name: parent.name,
           items: [item]));
     }
+
     totalPrice = totalPrice + item.price!;
     cartItems.add(item);
     parent.items.remove(item);
-
     showCustomSnackBar(context, "Added Successfully", Colors.green);
     emit(AddToCart());
   }
+
+ 
 
   void deleteParentItemFromCart({
     required Item item,

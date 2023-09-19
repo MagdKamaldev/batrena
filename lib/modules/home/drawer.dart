@@ -1,3 +1,4 @@
+import 'package:batrena/modules/add_branch/branch_details.dart';
 import 'package:batrena/modules/heat_map/heat_map_screen.dart';
 import 'package:batrena/shared/colors.dart';
 import 'package:batrena/shared/components/components.dart';
@@ -20,34 +21,77 @@ class AppDrawer extends StatelessWidget {
               navigateTo(context, HeatMapScreen());
             },
             child: Container(
-                height: 60,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: const Color.fromRGBO(238, 245, 245, 1),
-                  borderRadius: BorderRadius.circular(12),
-                ),
+              height: 60,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: const Color.fromRGBO(238, 245, 245, 1),
+                borderRadius: BorderRadius.circular(12),
+              ),
               child: Card(
                 elevation: 3,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Text(
-                      "Heat Map",
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyLarge!
-                          .copyWith(color: raisinBlack),
-                    ),
-                    const Icon(
-                      Icons.map,
-                    )
-                  ],
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text(
+                        "Heat Map",
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyLarge!
+                            .copyWith(color: raisinBlack),
+                      ),
+                      const Spacer(),
+                      const Icon(
+                        Icons.map,
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
           SizedBox(
             height: size.height * 0.03,
+          ),
+
+          GestureDetector(
+            onTap: () {
+              navigateTo(context, BranchDetails());
+            },
+            child: Container(
+              height: 60,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: const Color.fromRGBO(238, 245, 245, 1),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Card(
+                elevation: 3,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text(
+                        "Add Branch",
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyLarge!
+                            .copyWith(color: raisinBlack),
+                      ),
+                      const Spacer(),
+                      const Icon(
+                        Icons.add,
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: size.height * 0.02,
           ),
           GestureDetector(
             onTap: () {
@@ -62,27 +106,28 @@ class AppDrawer extends StatelessWidget {
               ),
               child: Card(
                 elevation: 3,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Text(
-                      "Logout",
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyLarge!
-                          .copyWith(color: raisinBlack),
-                    ),
-                    const Icon(
-                      Icons.logout,
-                    )
-                  ],
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text(
+                        "Logout",
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyLarge!
+                            .copyWith(color: raisinBlack),
+                      ),
+                      const Spacer(),
+                      const Icon(
+                        Icons.logout,
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
-          // SizedBox(
-          //   height: size.height * 0.02,
-          // ),
           // GestureDetector(
           //   onTap: () {
           //     navigateTo(context, const ChangeShiftScreen());
