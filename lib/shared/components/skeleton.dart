@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class Skeleton extends StatelessWidget {
   const Skeleton({Key? key, this.height, this.width}) : super(key: key);
 
@@ -14,8 +13,7 @@ class Skeleton extends StatelessWidget {
       padding: const EdgeInsets.all(10 / 2),
       decoration: BoxDecoration(
           color: Colors.black.withOpacity(0.04),
-          borderRadius:
-              const BorderRadius.all(Radius.circular(10))),
+          borderRadius: const BorderRadius.all(Radius.circular(10))),
     );
   }
 }

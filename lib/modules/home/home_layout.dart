@@ -2,7 +2,6 @@ import 'package:batrena/modules/branch_details_shown/branch_details_showed.dart'
 import 'package:batrena/modules/home/drawer.dart';
 import 'package:batrena/shared/colors.dart';
 import 'package:batrena/shared/components/components.dart';
-import 'package:batrena/shared/components/shimmer.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -75,7 +74,9 @@ class _HomeLayoutState extends State<HomeLayout> {
                   ),
                   ConditionalBuilder(
                     condition: state is FetchBranchesSuccessState,
-                    fallback: (context) => ShimmerLoading(),
+                    fallback: (context) => const Center(
+                      child: CircularProgressIndicator(),
+                    ),
                     builder: (context) => GridView.count(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
